@@ -1,0 +1,113 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SingleLogin.master.cs" Inherits="TOTS.SingleLogin" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Technician Online Time Sheet</title>
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <link href="/Styles/base.css" rel="stylesheet" />
+    <link href="/Styles/default.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+         <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+            <Scripts>
+                <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.Core.js" />
+                <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.jQuery.js" />
+                <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.jQueryInclude.js" />
+            </Scripts>
+        </telerik:RadScriptManager>
+         <div id="wrapper" runat="server">
+            <telerik:RadPageLayout runat="server" ID="MasterLayout" GridType="Fluid">
+                <Rows>
+                    <%--Header--%>
+                    <telerik:LayoutRow CssClass="header">
+                        <Columns>
+                            <%--Logo--%>
+                            <telerik:LayoutColumn Span="2" SpanMd="3" SpanSm="12" SpanXs="12">
+                                <a href="#" class="logo">
+                                    <img src="images/VVG-logo-reversed---200px-tall.png" alt="site logo" />
+                                </a>
+                            </telerik:LayoutColumn>
+                            <telerik:LayoutColumn Span="10" SpanMd="3" SpanSm="12" SpanXs="12">
+                            </telerik:LayoutColumn>
+                        </Columns>
+                    </telerik:LayoutRow>
+
+                    <%--Main--%>
+
+                    <telerik:LayoutRow>
+                        <Columns>
+                            <telerik:LayoutColumn CssClass="jumbotron">
+                                <h1>
+                                    <telerik:RadLabel ID="RadLabelAppTitle" runat="server"></telerik:RadLabel>
+                                </h1>
+                                <h2>Velocity Web Application
+                                </h2>
+                            </telerik:LayoutColumn>
+                        </Columns>
+                    </telerik:LayoutRow>
+                    <telerik:LayoutRow>
+                        <Columns>
+                            <telerik:LayoutColumn HiddenMd="false" HiddenSm="false" HiddenXs="false">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <h2>Username:</h2>
+                                        </td>
+                                        <td>
+                                            <telerik:RadTextBox ID="RadTextBoxExcedeId" runat="server"></telerik:RadTextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h2>Password:
+                                            </h2>
+                                        </td>
+                                        <td>
+                                            <telerik:RadTextBox ID="RadTextBoxExcedePassword" runat="server" TextMode="Password"></telerik:RadTextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <telerik:RadButton ID="RadButtonSubmitCredentials" runat="server" Text="Logon" OnClick="RadButtonSubmitCredentials_Click"></telerik:RadButton>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <telerik:RadLabel ID="RadLabelOutput" runat="server"></telerik:RadLabel>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </telerik:LayoutColumn>
+                        </Columns>
+                    </telerik:LayoutRow>
+
+
+                    <%--Footer--%>
+                    <telerik:LayoutRow>
+                        <Columns>
+                            <telerik:LayoutColumn CssClass="footer">
+                                <hr />
+                                © 2018 Velocity Internal Application - For Use by Velocity Vehicle Group Employees Only.
+                            </telerik:LayoutColumn>
+                        </Columns>
+                    </telerik:LayoutRow>
+                </Rows>
+            </telerik:RadPageLayout>
+        </div>
+        <div>
+            <asp:HiddenField runat="server" ID="HiddenFieldEmpId" Value="1000" />
+            <asp:HiddenField runat="server" ID="HiddenFieldFullName" Value="DefaultUser" />
+            <asp:HiddenField runat="server" ID="HiddenFieldWspId" Value="0" />
+        </div>
+        <div id="Content" runat="server" class="content" visible="false">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

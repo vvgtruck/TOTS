@@ -1,0 +1,96 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="TOTS.MasterPage" %>
+
+<%@ Register TagPrefix="telerik" Namespace="Telerik.Web.UI" Assembly="Telerik.Web.UI" %>
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <link href="styles/base.css" rel="stylesheet" />
+    <link href="styles/custom.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900" rel="stylesheet" />
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: 'en,es' }, 'google_translate_element');
+        }
+    </script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
+        <div id="wrapper">
+            <telerik:RadPageLayout runat="server" ID="MasterLayout" GridType="Fluid">
+                <Rows>
+                    <%--Header--%>
+                    <telerik:LayoutRow CssClass="header vvg-fd-header-container">
+                        <Columns>
+                            <%--Logo--%>
+                            <telerik:LayoutColumn Span="2" SpanMd="3" SpanSm="12" SpanXs="12">
+                                <a href="#" class="logo">
+                                    <img src="../images/VVG-logo.png" alt="site logo" />
+                                </a>
+
+                            </telerik:LayoutColumn>
+
+                            <%--Main Nav--%>
+                            <telerik:LayoutColumn Span="10" SpanMd="9" SpanSm="12" SpanXs="12">
+                                <telerik:RadMenu ID="RadMenu1" runat="server" RenderMode="Auto">
+                                    <Items>
+                                        <telerik:RadMenuItem Text="Home" NavigateUrl="Home.aspx" />
+                                        <telerik:RadMenuItem IsSeparator="true" />
+                                        <telerik:RadMenuItem Text="My Time Sheet" NavigateUrl="MyTimeSheet.aspx" />
+                                        <telerik:RadMenuItem IsSeparator="true" />
+                                        <telerik:RadMenuItem Text="My Work" NavigateUrl="MyOpenWork.aspx" />
+                                        <telerik:RadMenuItem IsSeparator="true" />
+                                        <telerik:RadMenuItem Text="Approve my Time" NavigateUrl="MyTimeApprovals.aspx" />
+                                        <telerik:RadMenuItem IsSeparator="true" />
+                                        <telerik:RadMenuItem Text="Lunch Violations" NavigateUrl="MyLunchViolations.aspx" />
+                                        <telerik:RadMenuItem IsSeparator="true" />
+                                        <telerik:RadMenuItem Text="Logout" NavigateUrl="Default.aspx" />
+                                    </Items>
+                                </telerik:RadMenu>
+                            </telerik:LayoutColumn>
+                        </Columns>
+                    </telerik:LayoutRow>
+
+                    <%--Main--%>
+                    <telerik:LayoutRow CssClass="mainhomepage">
+                        <Columns>
+                            <%--Sidebar--%>
+                            <telerik:LayoutColumn Span="2" HiddenMd="true" HiddenSm="true" HiddenXs="true">
+                            </telerik:LayoutColumn>
+
+                            <%--Content--%>
+                            <telerik:CompositeLayoutColumn Span="10" SpanMd="12" SpanSm="12" SpanXs="12">
+                                <Content>
+                                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                    </asp:ContentPlaceHolder>
+                                    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                                    </asp:ContentPlaceHolder>
+                                </Content>
+                            </telerik:CompositeLayoutColumn>
+                        </Columns>
+                    </telerik:LayoutRow>
+
+                    <%--Footer--%>
+                    <telerik:LayoutRow>
+                        <Columns>
+                            <telerik:LayoutColumn CssClass="footer">
+                                © 2019 Velocity Vehicle Group, 2429 Peck Rd, Whittier, CA 90601
+                                <div id="google_translate_element"></div>
+                            </telerik:LayoutColumn>
+                        </Columns>
+                    </telerik:LayoutRow>
+                </Rows>
+            </telerik:RadPageLayout>
+        </div>
+    </form>
+</body>
+</html>
