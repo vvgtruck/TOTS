@@ -10,123 +10,105 @@
 namespace TOTS {
     
     
-    public partial class MyLunchViolations {
+    public partial class Waiver {
         
         /// <summary>
-        /// RadAjaxLoadingPanel1 control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadAjaxLoadingPanel RadAjaxLoadingPanel1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// RadAjaxManager1 control.
+        /// RadCheckboxWaiver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadAjaxManager RadAjaxManager1;
+        protected global::Telerik.Web.UI.RadCheckBox RadCheckboxWaiver;
         
         /// <summary>
-        /// RadPageLayout1 control.
+        /// RadTextBoxEmpName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadPageLayout RadPageLayout1;
+        protected global::Telerik.Web.UI.RadTextBox RadTextBoxEmpName;
         
         /// <summary>
-        /// RadWindowWaiver control.
+        /// RadTextBoxEmpId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadWindow RadWindowWaiver;
+        protected global::Telerik.Web.UI.RadTextBox RadTextBoxEmpId;
         
         /// <summary>
-        /// RadPageLayout2 control.
+        /// RadTextBoxPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadPageLayout RadPageLayout2;
+        protected global::Telerik.Web.UI.RadTextBox RadTextBoxPassword;
         
         /// <summary>
-        /// RadDropDownListPayPeriods control.
+        /// RadButtonWaiver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadDropDownList RadDropDownListPayPeriods;
+        protected global::Telerik.Web.UI.RadButton RadButtonWaiver;
         
         /// <summary>
-        /// SqlDataSourcePayPeriods control.
+        /// RadTextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourcePayPeriods;
+        protected global::Telerik.Web.UI.RadTextBox RadTextBox1;
         
         /// <summary>
-        /// RadButtonUpdate control.
+        /// RadTextBox2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadButton RadButtonUpdate;
+        protected global::Telerik.Web.UI.RadTextBox RadTextBox2;
         
         /// <summary>
-        /// HiddenFieldEmpIdUser control.
+        /// RadTextBox3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldEmpIdUser;
+        protected global::Telerik.Web.UI.RadTextBox RadTextBox3;
         
         /// <summary>
-        /// HiddenFieldEmpNameUser control.
+        /// RadButtonRevoke control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldEmpNameUser;
+        protected global::Telerik.Web.UI.RadButton RadButtonRevoke;
         
         /// <summary>
-        /// HiddenFieldWspIdUser control.
+        /// RadButtonClose control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldWspIdUser;
-        
-        /// <summary>
-        /// RadGridSingleTechTimeLunchViolations control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid RadGridSingleTechTimeLunchViolations;
-        
-        /// <summary>
-        /// SelectTechTimeLunchViolations control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SelectTechTimeLunchViolations;
+        protected global::Telerik.Web.UI.RadButton RadButtonClose;
     }
 }

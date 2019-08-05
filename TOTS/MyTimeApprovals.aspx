@@ -70,9 +70,9 @@
             </telerik:LayoutRow>
             <telerik:LayoutRow>
                 <Columns>
-                    <telerik:LayoutColumn Span="6" SpanMd="6" SpanSm="6" HiddenXs="true">
+                    <telerik:LayoutColumn Span="12" SpanMd="6" SpanSm="6" HiddenXs="true">
                         <%--  Time Information Approving--%>
-                        <telerik:RadGrid ID="RadGridSingleTechTimeAttendence" runat="server" DataSourceID="SelectTechTimeSingleTechAttendance" GroupPanelPosition="Top" ShowFooter="True" OnItemCommand="RadGridSingleTechTimeAttendence_ItemCommand">
+                        <telerik:RadGrid ID="RadGridSingleTechTimeAttendence" runat="server" DataSourceID="SelectTechTimeSingleTechAttendance" GroupPanelPosition="Top" ShowFooter="True" OnItemCommand="RadGridSingleTechTimeAttendence_ItemCommand" OnItemDataBound="RadGridSingleTechTimeAttendence_ItemDataBound">
                             <GroupingSettings RetainGroupFootersVisibility="true" />
                             <MasterTableView AutoGenerateColumns="false" ShowGroupFooter="true" GroupsDefaultExpanded="false" Caption="Attendence / Lunch Entries">
                                 <Columns>
@@ -84,10 +84,14 @@
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="Shop" DataType="System.Decimal" FilterControlAltText="Filter Shop column" HeaderText="Shop Time" ReadOnly="True" SortExpression="Shop" UniqueName="Shop" DataFormatString="{0:0.00}" Aggregate="Sum">
                                     </telerik:GridBoundColumn>
+                                    <telerik:GridCalculatedColumn DataFields="Attendence,Shop" Expression="{0}-{1}" HeaderText="Idle Time" UniqueName="Idle" DataFormatString="{0:0.00}" DataType="System.Decimal">
+                                    </telerik:GridCalculatedColumn>
                                     <telerik:GridButtonColumn HeaderText="Approve"
                                         SortExpression="Approve" Text="Approve Day" UniqueName="Approve"
                                         CommandName="Approve">
                                     </telerik:GridButtonColumn>
+                                    <telerik:GridBoundColumn DataField="Approval" FilterControlAltText="Filter Approval column" HeaderText="Approval" ReadOnly="True" SortExpression="Approval" UniqueName="Approval">
+                                    </telerik:GridBoundColumn>
                                 </Columns>
                             </MasterTableView>
                         </telerik:RadGrid>
@@ -98,8 +102,7 @@
                             </SelectParameters>
                         </asp:SqlDataSource>
                     </telerik:LayoutColumn>
-                    <telerik:LayoutColumn Span="6" SpanMd="6" SpanSm="6" HiddenXs="true">
-                        <%--     approve controls--%>
+<%--                    <telerik:LayoutColumn Span="6" SpanMd="6" SpanSm="6" HiddenXs="true">
                         <div id="TimeApproval" runat="server" visible="false">
                             <table style="width: 100%">
                                 <tr>
@@ -151,7 +154,7 @@
                                 </tr>
                             </table>
                         </div>
-                    </telerik:LayoutColumn>
+                    </telerik:LayoutColumn>--%>
                 </Columns>
             </telerik:LayoutRow>
         </Rows>

@@ -16,6 +16,7 @@
             <telerik:AjaxSetting AjaxControlID="RadGridSingleTechTimeLunchViolations">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGridSingleTechTimeLunchViolations" LoadingPanelID="RadAjaxLoadingPanel1" />
+                     <telerik:AjaxUpdatedControl ControlID="RadWindowWaiver" LoadingPanelID="RadAjaxLoadingPanel1" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
@@ -33,6 +34,13 @@
     </telerik:RadPageLayout>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="Server">
+    <telerik:RadWindow RenderMode="Lightweight" ID="RadWindowWaiver" runat="server" Width="425px" Height="550px" Modal="true" Style="z-index: 100001;">
+        <ContentTemplate>
+            <p style="text-align: center;">
+                Waiver Box
+            </p>
+        </ContentTemplate>
+    </telerik:RadWindow>
     <telerik:RadPageLayout runat="server" ID="RadPageLayout2">
         <Rows>
             <telerik:LayoutRow>
@@ -65,7 +73,7 @@
             <telerik:LayoutRow>
                 <Columns>
                     <telerik:LayoutColumn Span="12" SpanMd="12" SpanSm="12" HiddenXs="true">
-                        <telerik:RadGrid ID="RadGridSingleTechTimeLunchViolations" runat="server" DataSourceID="SelectTechTimeLunchViolations" GroupPanelPosition="Top" ShowFooter="True">
+                        <telerik:RadGrid ID="RadGridSingleTechTimeLunchViolations" runat="server" DataSourceID="SelectTechTimeLunchViolations" GroupPanelPosition="Top" ShowFooter="True" OnItemCommand="RadGridSingleTechTimeLunchViolations_ItemCommand" OnItemDataBound="RadGridSingleTechTimeLunchViolations_ItemDataBound">
                             <GroupingSettings RetainGroupFootersVisibility="true" />
                             <MasterTableView AutoGenerateColumns="false" ShowGroupFooter="true" GroupsDefaultExpanded="false" Caption="Lunch Violations">
                                 <Columns>

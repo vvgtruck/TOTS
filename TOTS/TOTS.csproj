@@ -155,6 +155,13 @@
     <Compile Include="TimeSheet.aspx.designer.cs">
       <DependentUpon>TimeSheet.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Waiver.aspx.cs">
+      <DependentUpon>Waiver.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Waiver.aspx.designer.cs">
+      <DependentUpon>Waiver.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\RadCaptcha\0.wav" />
@@ -217,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ToTSStyle.css" />
+    <Content Include="Waiver.aspx" />
     <Content Include="web.config" />
     <Content Include="SingleLogin.Master" />
     <Content Include="MasterPageSingleMenu.Master" />
@@ -264,7 +272,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
