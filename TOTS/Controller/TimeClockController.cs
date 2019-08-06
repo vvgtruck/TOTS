@@ -11,10 +11,10 @@ using TOTS.Model;
 
 namespace TOTS.Controller
 {
-    public class TCApiController : ApiController
+    public class TimeClockController : ApiController
     {
         // GET api/<controller>/<action>
-        [Route("api/tcapi/getpayperiod")]
+        [Route("api/timeclock/getpayperiod")]
         public HttpResponseMessage GetPayPeriod()
         {
 
@@ -51,7 +51,7 @@ namespace TOTS.Controller
         }
 
         // GET api/<controller>
-        [Route("api/tcapi/getdata")]
+        [Route("api/timeclock/getdata")]
         public IEnumerable<string> GetData()
         {
             return new string[] { "value1", "value2" };
