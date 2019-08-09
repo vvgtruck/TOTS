@@ -63,7 +63,7 @@ namespace TOTS.Controller
         }
 
         /**
-         * Get Tech's TimeSheet Calc.
+         * Get Tech's TimeSheet Calc for Dashboard.
          *
          * @param  PayPeriodId Selected PayPeriod from the Pay Period List
          * @param  EmpId LoggedIn User's EmpId (Dayforce Id)
@@ -162,6 +162,150 @@ namespace TOTS.Controller
                 conn.Close();
             }
             return Request.CreateResponse(HttpStatusCode.OK, techTimeSheetCalc, Configuration.Formatters.JsonFormatter);
+        }
+
+        // GET api/<controller>/<action>
+        [Route("api/timeclock/timesheet/singletech")]
+        public HttpResponseMessage GetSingleTechShopFloorAndAttendence([FromUri]string payperiod_id, [FromUri]string emp_id)
+        {
+
+            LunchAttendence lunchAttendence = new LunchAttendence();
+
+            Dictionary<string, LunchAttendenceEntry> lunchAttendenceEntries = new Dictionary<string, LunchAttendenceEntry>();
+            float totalLunchHours = 0;
+            float totalAttendenceHours = 0;
+
+            string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
+
+            using (var conn = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("VVGWebApps_SP_Service_SelectTechTimeSingleTechAttendanceV2", conn)
+            {
+                CommandType = CommandType.StoredProcedure
+            })
+            {
+                conn.Open();
+
+                // Add input parameter
+
+                SqlParameter EmpId = new SqlParameter();
+                EmpId.ParameterName = "@EmpId";
+                EmpId.Value = emp_id;
+                EmpId.SqlDbType = SqlDbType.VarChar;
+                EmpId.Size = 25;
+                EmpId.Direction = ParameterDirection.Input;
+                command.Parameters.Add(EmpId);
+
+                SqlParameter PayperiodId = new SqlParameter();
+                PayperiodId.ParameterName = "@payrollId";
+                PayperiodId.Value = payperiod_id;
+                PayperiodId.SqlDbType = SqlDbType.Int;
+                PayperiodId.Size = 25;
+                PayperiodId.Direction = ParameterDirection.Input;
+                command.Parameters.Add(PayperiodId);
+
+                // execute the command
+                using (SqlDataReader rdr = command.ExecuteReader())
+                {
+                    // iterate through results
+                    int i = 0;
+
+                    while (rdr.Read())
+                    {
+
+                        // Dictionary's Key
+                        string weekDay = rdr["Weekday"].ToString();
+
+                        if (lunchAttendenceEntries.Count == 0
+                            || !lunchAttendenceEntries.ContainsKey(weekDay))
+                        {
+                            LunchAttendenceWeekday lunchAttendenceWeekday = new LunchAttendenceWeekday();
+                            lunchAttendenceWeekday.Reason = rdr["Reason"].ToString();
+                            lunchAttendenceWeekday.InTime = rdr["DateStart"].ToString();
+                            lunchAttendenceWeekday.OutTime = rdr["DateEnd"].ToString();
+
+                            if (DBNull.Value.Equals(rdr["PaidTime"]))
+                            {
+                                lunchAttendenceWeekday.PaidTime = 0;
+                            }
+                            else
+                            {
+                                lunchAttendenceWeekday.PaidTime = float.Parse(rdr["PaidTime"].ToString());
+                            }
+
+                            if (DBNull.Value.Equals(rdr["NonPaidTime"])) {
+                                lunchAttendenceWeekday.NonPaidTime = 0;
+                            }
+                            else
+                            {
+                                lunchAttendenceWeekday.NonPaidTime = float.Parse(rdr["NonPaidTime"].ToString());
+                            }
+
+                            lunchAttendenceWeekday.Des1 = rdr["Des1"].ToString();
+
+                            List<LunchAttendenceWeekday> lunchAttendenceWeekdays = new List<LunchAttendenceWeekday>();
+                            lunchAttendenceWeekdays.Add(lunchAttendenceWeekday);
+
+
+                            LunchAttendenceEntry lunchAttendenceEntry = new LunchAttendenceEntry();
+                            lunchAttendenceEntry.lunchAttendenceWeekdays = lunchAttendenceWeekdays;
+                            lunchAttendenceEntry.TAttendenceHours = lunchAttendenceWeekday.PaidTime;
+                            lunchAttendenceEntry.TLunchHours = lunchAttendenceWeekday.NonPaidTime;
+
+                            lunchAttendenceEntries.Add(weekDay, lunchAttendenceEntry);
+                            totalAttendenceHours += lunchAttendenceEntry.TAttendenceHours;
+                            totalLunchHours += lunchAttendenceEntry.TLunchHours;
+
+                        } else if(lunchAttendenceEntries.ContainsKey(weekDay))
+                        {
+                            LunchAttendenceEntry lunchAttendenceEntry = lunchAttendenceEntries[weekDay];
+                            List<LunchAttendenceWeekday> tempLAWeekDays = lunchAttendenceEntry.lunchAttendenceWeekdays;
+
+                            LunchAttendenceWeekday lunchAttendenceWeekday = new LunchAttendenceWeekday();
+                            lunchAttendenceWeekday.Reason = rdr["Reason"].ToString();
+                            lunchAttendenceWeekday.InTime = rdr["DateStart"].ToString();
+                            lunchAttendenceWeekday.OutTime = rdr["DateEnd"].ToString();
+
+                            if (DBNull.Value.Equals(rdr["PaidTime"]))
+                            {
+                                lunchAttendenceWeekday.PaidTime = 0;
+                            }
+                            else
+                            {
+                                lunchAttendenceWeekday.PaidTime = float.Parse(rdr["PaidTime"].ToString());
+                            }
+
+                            if (DBNull.Value.Equals(rdr["NonPaidTime"]))
+                            {
+                                lunchAttendenceWeekday.NonPaidTime = 0;
+                            }
+                            else
+                            {
+                                lunchAttendenceWeekday.NonPaidTime = float.Parse(rdr["NonPaidTime"].ToString());
+                            }
+
+                            lunchAttendenceWeekday.Des1 = rdr["Des1"].ToString();
+
+                            tempLAWeekDays.Add(lunchAttendenceWeekday);
+
+                            lunchAttendenceEntry.TAttendenceHours += lunchAttendenceWeekday.PaidTime;
+                            lunchAttendenceEntry.TLunchHours += lunchAttendenceWeekday.NonPaidTime;
+
+                            totalAttendenceHours += lunchAttendenceEntry.TAttendenceHours;
+                            totalLunchHours += lunchAttendenceEntry.TLunchHours;
+                        } 
+
+                        i++;
+                    }
+
+                    lunchAttendence.lunchAttendenceEntries = lunchAttendenceEntries;
+                    lunchAttendence.TAttendenceHours = totalAttendenceHours;
+                    lunchAttendence.TLunchHours = totalLunchHours;
+                }
+
+                conn.Close();
+            }
+            
+            return Request.CreateResponse(HttpStatusCode.OK, lunchAttendence, Configuration.Formatters.JsonFormatter);
         }
 
         // GET api/<controller>
