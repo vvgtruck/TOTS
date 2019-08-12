@@ -17,6 +17,8 @@ namespace TOTS.Controller
      * @author     Satyen Udeshi <satyen@savitriya.com>
      * @since      Class available since Release 1.0
      */
+
+    [Authorize]
     public class TimeClockController : ApiController
     {
 
@@ -165,9 +167,12 @@ namespace TOTS.Controller
         }
 
         // GET api/<controller>/<action>
-        [Route("api/timeclock/timesheet/singletech")]
-        public HttpResponseMessage GetSingleTechShopFloorAndAttendence([FromUri]string payperiod_id, [FromUri]string emp_id)
+        [Route("api/timeclock/timesheet/singletech/lunchattendence")]
+        public HttpResponseMessage GetSingleTechLunchAttendence([FromUri]string payperiod_id, [FromUri]string emp_id)
         {
+
+            /// Following Code Executes the VVGWebApps_SP_Service_SelectTechTimeSingleTechAttendanceV2 procedure
+            /// and returns the Lunch and Attendence entries in the required format.
 
             LunchAttendence lunchAttendence = new LunchAttendence();
 
@@ -290,8 +295,8 @@ namespace TOTS.Controller
                             lunchAttendenceEntry.TAttendenceHours += lunchAttendenceWeekday.PaidTime;
                             lunchAttendenceEntry.TLunchHours += lunchAttendenceWeekday.NonPaidTime;
 
-                            totalAttendenceHours += lunchAttendenceEntry.TAttendenceHours;
-                            totalLunchHours += lunchAttendenceEntry.TLunchHours;
+                            totalAttendenceHours += lunchAttendenceWeekday.PaidTime;
+                            totalLunchHours += lunchAttendenceWeekday.NonPaidTime;
                         } 
 
                         i++;
@@ -306,6 +311,133 @@ namespace TOTS.Controller
             }
             
             return Request.CreateResponse(HttpStatusCode.OK, lunchAttendence, Configuration.Formatters.JsonFormatter);
+        }
+
+        // GET api/<controller>/<action>
+        [Route("api/timeclock/timesheet/singletech/shopfloor")]
+        public HttpResponseMessage GetSingleTechShopFloor([FromUri]string payperiod_id, [FromUri]string emp_id)
+        {
+
+            /// Following Code Executes the VVGWebApps_SP_Service_SelectTechTimeSingleTechShopFloor procedure
+            /// and returns the Shop Floor entries in the required format.
+
+            ShopFloor shopFloor = new ShopFloor();
+
+            Dictionary<string, ShopFloorEntry> shopFloorEntries = new Dictionary<string, ShopFloorEntry>();
+            float totalShopFloorHours = 0;
+
+            string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
+
+            using (var conn = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("VVGWebApps_SP_Service_SelectTechTimeSingleTechShopFloor", conn)
+            {
+                CommandType = CommandType.StoredProcedure
+            })
+            {
+                conn.Open();
+
+                // Add input parameter
+
+                SqlParameter EmpId = new SqlParameter();
+                EmpId.ParameterName = "@EmpId";
+                EmpId.Value = emp_id;
+                EmpId.SqlDbType = SqlDbType.VarChar;
+                EmpId.Size = 25;
+                EmpId.Direction = ParameterDirection.Input;
+                command.Parameters.Add(EmpId);
+
+                SqlParameter PayperiodId = new SqlParameter();
+                PayperiodId.ParameterName = "@payrollId";
+                PayperiodId.Value = payperiod_id;
+                PayperiodId.SqlDbType = SqlDbType.Int;
+                PayperiodId.Size = 25;
+                PayperiodId.Direction = ParameterDirection.Input;
+                command.Parameters.Add(PayperiodId);
+
+                // execute the command
+                using (SqlDataReader rdr = command.ExecuteReader())
+                {
+                    // iterate through results
+                    int i = 0;
+
+                    while (rdr.Read())
+                    {
+
+                        // Dictionary's Key
+                        string weekDay = rdr["Weekday"].ToString();
+
+                        if (shopFloorEntries.Count == 0
+                            || !shopFloorEntries.ContainsKey(weekDay))
+                        {
+                            ShopFloorWeekday shopFloorWeekday = new ShopFloorWeekday();
+                            shopFloorWeekday.Invoice = rdr["Invoice"].ToString();
+                            shopFloorWeekday.CusName = rdr["CusName"].ToString();
+                            shopFloorWeekday.Reason = rdr["Reason"].ToString();
+                            shopFloorWeekday.InTime = rdr["DateStart"].ToString();
+                            shopFloorWeekday.OutTime = rdr["DateEnd"].ToString();
+
+                            if (DBNull.Value.Equals(rdr["Duration"]))
+                            {
+                                shopFloorWeekday.Duration = 0;
+                            }
+                            else
+                            {
+                                shopFloorWeekday.Duration = float.Parse(rdr["Duration"].ToString());
+                            }
+
+                            shopFloorWeekday.Des1 = rdr["Des1"].ToString();
+
+                            List<ShopFloorWeekday> shopFloorWeekdays = new List<ShopFloorWeekday>();
+                            shopFloorWeekdays.Add(shopFloorWeekday);
+
+
+                            ShopFloorEntry shopFloorEntry = new ShopFloorEntry();
+                            shopFloorEntry.shopFloorWeekdays = shopFloorWeekdays;
+                            shopFloorEntry.TShopFloorHours = shopFloorWeekday.Duration;
+
+                            shopFloorEntries.Add(weekDay, shopFloorEntry);
+                            totalShopFloorHours += shopFloorEntry.TShopFloorHours;
+
+                        }
+                        else if (shopFloorEntries.ContainsKey(weekDay))
+                        {
+                            ShopFloorEntry shopFloorEntry = shopFloorEntries[weekDay];
+                            List<ShopFloorWeekday> tempSWeekDays = shopFloorEntry.shopFloorWeekdays;
+
+                            ShopFloorWeekday shopFloorWeekday = new ShopFloorWeekday();
+                            shopFloorWeekday.Reason = rdr["Reason"].ToString();
+                            shopFloorWeekday.InTime = rdr["DateStart"].ToString();
+                            shopFloorWeekday.OutTime = rdr["DateEnd"].ToString();
+
+                            if (DBNull.Value.Equals(rdr["Duration"]))
+                            {
+                                shopFloorWeekday.Duration = 0;
+                            }
+                            else
+                            {
+                                shopFloorWeekday.Duration = float.Parse(rdr["Duration"].ToString());
+                            }
+
+                            shopFloorWeekday.Des1 = rdr["Des1"].ToString();
+
+                            tempSWeekDays.Add(shopFloorWeekday);
+
+                            shopFloorEntry.TShopFloorHours += shopFloorWeekday.Duration;
+
+                            totalShopFloorHours += shopFloorWeekday.Duration;
+                        }
+
+                        i++;
+                    }
+
+                    shopFloor.shopFloorEntries = shopFloorEntries;
+                    shopFloor.TShopFloorHours = totalShopFloorHours;
+                }
+
+                conn.Close();
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, shopFloor, Configuration.Formatters.JsonFormatter);
         }
 
         // GET api/<controller>

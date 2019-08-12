@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TOTS.Model
 {
-    public class ShopFloorWeekday
+    public class ShopFloorWeekday : Weekday
     {
       
         public string Invoice { get; set; }
