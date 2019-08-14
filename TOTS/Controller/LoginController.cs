@@ -76,6 +76,7 @@ namespace TOTS.Controller
                 conn.Close();
                 conn.Dispose();
 
+
                 if (Validated.Value.ToString() == "0")
                 {
                     loginResponse.Error = "Username, Password, or Role is Incorrect";
@@ -85,11 +86,56 @@ namespace TOTS.Controller
 
                 if (Validated.Value.ToString() == "1")
                 {
-                    loginResponse.ApiToken = createToken(loginRequest.Username); ;
+                    loginResponse.ApiToken = createToken(loginRequest.Username);
+
                     loginResponse.EmpName = EmpName.Value.ToString();
                     loginResponse.Error = null;
                 }
             }
+
+            /**
+             * Following takes the API token and updates the same next to the EXT_COEMP table in VVGFinancial DB.
+             */
+
+            DateTime dateTimeNow = DateTime.Now;
+
+            String query = "Update EXT_COEMP " +
+                "set AuthToken = @authToken" +
+                ", AuthTokenUpdate = @dateTimeNow " +
+                " where EmpId = '" + loginRequest.Username +"'";
+
+            int updateTokenResult = 0;
+
+            string vFinConnectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGFinancial;UID=sa;PWD=Network9899;";
+
+            using (var conn = new SqlConnection(vFinConnectionString))
+            using (var command = new SqlCommand(query, conn)
+            {
+                CommandType = CommandType.Text
+            })
+            {
+                conn.Open();
+
+                command.Parameters.AddWithValue("@authToken", loginResponse.ApiToken.Substring(0,99));
+                command.Parameters.AddWithValue("@dateTimeNow", dateTimeNow);
+
+                // Sample Token
+                // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEyMTg1IiwibmJmIjoxNTY1NjE0NjM0LCJleHAiOjE1NjYyMTk0MzQsImlhdCI6MTU2NTYxNDYzNCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo2MTI5OSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjEyOTkifQ.F_mpI9FLOjrsp1tdbzFh3DcvnsPtRB3aSQHH3GHvlrQ
+                updateTokenResult = command.ExecuteNonQuery();
+
+                command.Dispose();
+                conn.Close();
+
+            }
+
+            if(updateTokenResult == 0)
+            {
+                loginResponse.Error = "There was an error while login, Please try again!";
+                loginResponse.ApiToken = "";
+                loginResponse.EmpName = "";
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, loginResponse, Configuration.Formatters.JsonFormatter);
+            }
+
             return Request.CreateResponse(HttpStatusCode.OK, loginResponse, Configuration.Formatters.JsonFormatter);
         }
 
