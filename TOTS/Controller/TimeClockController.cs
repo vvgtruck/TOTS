@@ -34,7 +34,8 @@ namespace TOTS.Controller
 
             List<PayPeriod> payPeriods = new List<PayPeriod>();
 
-            string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
+            //string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
+            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGWebApps;UID=Raj;PWD=Cascadia1234;";
 
             using (var conn = new SqlConnection(connectionString))
             using (var command = new SqlCommand("VVGWebApps_SP_Service_SelectPayrollPeriods", conn)
@@ -78,7 +79,8 @@ namespace TOTS.Controller
         {
             TechTimeSheetCalc techTimeSheetCalc = new TechTimeSheetCalc();
 
-            string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=Excede;UID=sa;PWD=Network9899;";
+            //string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=Excede;UID=sa;PWD=Network9899;";
+            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=Excede;UID=Raj;PWD=Cascadia1234;";
 
             using (var conn = new SqlConnection(connectionString))
             using (var command = new SqlCommand("user_sp_VVGDev_TTS_ServiceTechnicianTimeCalc", conn)
@@ -129,34 +131,34 @@ namespace TOTS.Controller
                     while (rdr.Read())
                     {
                         //response += rdr["payrollId"] + " : " + rdr["Des"];
-                        techTimeSheetCalc.EmpId = rdr["EmpId"].ToString();
-                        techTimeSheetCalc.Name = rdr["Name"].ToString();
-                        techTimeSheetCalc.ShiftId = rdr["ShiftId"].ToString();
-                        techTimeSheetCalc.IdleRate = float.Parse(rdr["IdleRate"].ToString());
-                        techTimeSheetCalc.ShopRate = float.Parse(rdr["ShopRate"].ToString());
-                        techTimeSheetCalc.ApprovedFlag = Int32.Parse(rdr["ApprovedFlag"].ToString());
-                        techTimeSheetCalc.LaborGuideActual = float.Parse(rdr["LaborGuideActual"].ToString());
-                        techTimeSheetCalc.LaborGuideBill = float.Parse(rdr["LaborGuideBill"].ToString());
-                        techTimeSheetCalc.AttendenceWeek1 = float.Parse(rdr["AttendenceWeek1"].ToString());
-                        techTimeSheetCalc.AttendenceWeek2 = float.Parse(rdr["AttendenceWeek2"].ToString());
-                        techTimeSheetCalc.OvertimeWeek1 = float.Parse(rdr["OvertimeWeek1"].ToString());
-                        techTimeSheetCalc.OvertimeWeek2 = float.Parse(rdr["OvertimeWeek2"].ToString());
-                        techTimeSheetCalc.DoubletimeWeek1 = float.Parse(rdr["DoubletimeWeek1"].ToString());
-                        techTimeSheetCalc.DoubletimeWeek2 = float.Parse(rdr["DoubletimeWeek2"].ToString());
-                        techTimeSheetCalc.ShoptimeWeek1 = float.Parse(rdr["ShoptimeWeek1"].ToString());
-                        techTimeSheetCalc.ShoptimeWeek2 = float.Parse(rdr["ShoptimeWeek2"].ToString());
-                        techTimeSheetCalc.IdletimeWeek1 = float.Parse(rdr["IdletimeWeek1"].ToString());
-                        techTimeSheetCalc.IdletimeWeek2 = float.Parse(rdr["IdletimeWeek2"].ToString());
-                        techTimeSheetCalc.WeightedRate = float.Parse(rdr["WeightedRate"].ToString());
-                        techTimeSheetCalc.ProductionTime = float.Parse(rdr["ProductionTime"].ToString());
-                        techTimeSheetCalc.Efficiency = float.Parse(rdr["Efficiency"].ToString());
-                        techTimeSheetCalc.Productivity = float.Parse(rdr["Productivity"].ToString());
-                        techTimeSheetCalc.IdlePay = float.Parse(rdr["IdlePay"].ToString());
-                        techTimeSheetCalc.RegPay = float.Parse(rdr["RegPay"].ToString());
-                        techTimeSheetCalc.OvertimePay = float.Parse(rdr["OvertimePay"].ToString());
-                        techTimeSheetCalc.DoubletimePay = float.Parse(rdr["DoubletimePay"].ToString());
-                        techTimeSheetCalc.ProductionBonus = float.Parse(rdr["ProductionBonus"].ToString());
-                        techTimeSheetCalc.PayTotal = float.Parse(rdr["PayTotal"].ToString());
+                        //techTimeSheetCalc.EmpId = rdr["EmpId"].ToString();
+                        //techTimeSheetCalc.Name = rdr["Name"].ToString();
+                        //techTimeSheetCalc.ShiftId = rdr["ShiftId"].ToString();
+                        //techTimeSheetCalc.IdleRate = float.Parse(rdr["IdleRate"].ToString());
+                        //techTimeSheetCalc.ShopRate = float.Parse(rdr["ShopRate"].ToString());
+                        //techTimeSheetCalc.ApprovedFlag = Int32.Parse(rdr["ApprovedFlag"].ToString());
+                        techTimeSheetCalc.LaborGuideActual = (float.Parse(rdr["LaborGuideActual"].ToString())) + " Hrs";
+                        techTimeSheetCalc.LaborGuideBill = rdr["LaborGuideBill"].ToString() + " Hrs";
+                        techTimeSheetCalc.AttendenceWeek = (float.Parse(rdr["AttendenceWeek1"].ToString()) + float.Parse(rdr["AttendenceWeek2"].ToString())) + " Hrs";
+                        //techTimeSheetCalc.AttendenceWeek2 = float.Parse(rdr["AttendenceWeek2"].ToString());
+                        techTimeSheetCalc.OvertimeWeek = (float.Parse(rdr["OvertimeWeek1"].ToString()) + float.Parse(rdr["OvertimeWeek2"].ToString())) + " Hrs";
+                        //techTimeSheetCalc.OvertimeWeek2 = float.Parse(rdr["OvertimeWeek2"].ToString());
+                        //techTimeSheetCalc.DoubletimeWeek1 = float.Parse(rdr["DoubletimeWeek1"].ToString());
+                        //techTimeSheetCalc.DoubletimeWeek2 = float.Parse(rdr["DoubletimeWeek2"].ToString());
+                        //techTimeSheetCalc.ShoptimeWeek1 = float.Parse(rdr["ShoptimeWeek1"].ToString());
+                        //techTimeSheetCalc.ShoptimeWeek2 = float.Parse(rdr["ShoptimeWeek2"].ToString());
+                        techTimeSheetCalc.IdletimeWeek = (float.Parse(rdr["IdletimeWeek1"].ToString()) + float.Parse(rdr["IdletimeWeek2"].ToString())) + " Hrs";
+                        //techTimeSheetCalc.IdletimeWeek2 = float.Parse(rdr["IdletimeWeek2"].ToString());
+                        //techTimeSheetCalc.WeightedRate = float.Parse(rdr["WeightedRate"].ToString());
+                        techTimeSheetCalc.ProductionTime = rdr["ProductionTime"].ToString() + " Hrs";
+                        techTimeSheetCalc.Efficiency = (float.Parse(rdr["Efficiency"].ToString()) * 100) + "%";
+                        techTimeSheetCalc.Productivity = (float.Parse(rdr["Productivity"].ToString()) * 100 ) + "%";
+                        //techTimeSheetCalc.IdlePay = float.Parse(rdr["IdlePay"].ToString());
+                        //techTimeSheetCalc.RegPay = float.Parse(rdr["RegPay"].ToString());
+                        //techTimeSheetCalc.OvertimePay = float.Parse(rdr["OvertimePay"].ToString());
+                        //techTimeSheetCalc.DoubletimePay = float.Parse(rdr["DoubletimePay"].ToString());
+                        //techTimeSheetCalc.ProductionBonus = float.Parse(rdr["ProductionBonus"].ToString());
+                        //techTimeSheetCalc.PayTotal = float.Parse(rdr["PayTotal"].ToString());
                         
                     }
                 }
@@ -174,13 +176,14 @@ namespace TOTS.Controller
             /// Following Code Executes the VVGWebApps_SP_Service_SelectTechTimeSingleTechAttendanceV2 procedure
             /// and returns the Lunch and Attendence entries in the required format.
 
-            LunchAttendence lunchAttendence = new LunchAttendence();
+            LunchAttendance lunchAttendence = new LunchAttendance();
 
-            Dictionary<string, LunchAttendenceEntry> lunchAttendenceEntries = new Dictionary<string, LunchAttendenceEntry>();
+            Dictionary<string, LunchAttendanceEntry> lunchAttendenceEntries = new Dictionary<string, LunchAttendanceEntry>();
             float totalLunchHours = 0;
             float totalAttendenceHours = 0;
 
-            string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
+            //string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
+            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGWebApps;UID=Raj;PWD=Cascadia1234;";
 
             using (var conn = new SqlConnection(connectionString))
             using (var command = new SqlCommand("VVGWebApps_SP_Service_SelectTechTimeSingleTechAttendanceV2", conn)
@@ -223,7 +226,7 @@ namespace TOTS.Controller
                         if (lunchAttendenceEntries.Count == 0
                             || !lunchAttendenceEntries.ContainsKey(weekDay))
                         {
-                            LunchAttendenceWeekday lunchAttendenceWeekday = new LunchAttendenceWeekday();
+                            LunchAttendanceWeekday lunchAttendenceWeekday = new LunchAttendanceWeekday();
                             lunchAttendenceWeekday.Reason = rdr["Reason"].ToString();
                             lunchAttendenceWeekday.InTime = rdr["DateStart"].ToString();
                             lunchAttendenceWeekday.OutTime = rdr["DateEnd"].ToString();
@@ -247,12 +250,12 @@ namespace TOTS.Controller
 
                             lunchAttendenceWeekday.Des1 = rdr["Des1"].ToString();
 
-                            List<LunchAttendenceWeekday> lunchAttendenceWeekdays = new List<LunchAttendenceWeekday>();
+                            List<LunchAttendanceWeekday> lunchAttendenceWeekdays = new List<LunchAttendanceWeekday>();
                             lunchAttendenceWeekdays.Add(lunchAttendenceWeekday);
 
 
-                            LunchAttendenceEntry lunchAttendenceEntry = new LunchAttendenceEntry();
-                            lunchAttendenceEntry.lunchAttendenceWeekdays = lunchAttendenceWeekdays;
+                            LunchAttendanceEntry lunchAttendenceEntry = new LunchAttendanceEntry();
+                            lunchAttendenceEntry.lunchAttendanceWeekdays = lunchAttendenceWeekdays;
                             lunchAttendenceEntry.TAttendenceHours = lunchAttendenceWeekday.PaidTime;
                             lunchAttendenceEntry.TLunchHours = lunchAttendenceWeekday.NonPaidTime;
 
@@ -262,10 +265,10 @@ namespace TOTS.Controller
 
                         } else if(lunchAttendenceEntries.ContainsKey(weekDay))
                         {
-                            LunchAttendenceEntry lunchAttendenceEntry = lunchAttendenceEntries[weekDay];
-                            List<LunchAttendenceWeekday> tempLAWeekDays = lunchAttendenceEntry.lunchAttendenceWeekdays;
+                            LunchAttendanceEntry lunchAttendenceEntry = lunchAttendenceEntries[weekDay];
+                            List<LunchAttendanceWeekday> tempLAWeekDays = lunchAttendenceEntry.lunchAttendanceWeekdays;
 
-                            LunchAttendenceWeekday lunchAttendenceWeekday = new LunchAttendenceWeekday();
+                            LunchAttendanceWeekday lunchAttendenceWeekday = new LunchAttendanceWeekday();
                             lunchAttendenceWeekday.Reason = rdr["Reason"].ToString();
                             lunchAttendenceWeekday.InTime = rdr["DateStart"].ToString();
                             lunchAttendenceWeekday.OutTime = rdr["DateEnd"].ToString();
@@ -302,8 +305,8 @@ namespace TOTS.Controller
                         i++;
                     }
 
-                    lunchAttendence.lunchAttendenceEntries = lunchAttendenceEntries;
-                    lunchAttendence.TAttendenceHours = totalAttendenceHours;
+                    lunchAttendence.lunchAttendanceEntries = lunchAttendenceEntries;
+                    lunchAttendence.TAttendanceHours = totalAttendenceHours;
                     lunchAttendence.TLunchHours = totalLunchHours;
                 }
 
@@ -326,7 +329,8 @@ namespace TOTS.Controller
             Dictionary<string, ShopFloorEntry> shopFloorEntries = new Dictionary<string, ShopFloorEntry>();
             float totalShopFloorHours = 0;
 
-            string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
+            //string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
+            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGWebApps;UID=Raj;PWD=Cascadia1234;";
 
             using (var conn = new SqlConnection(connectionString))
             using (var command = new SqlCommand("VVGWebApps_SP_Service_SelectTechTimeSingleTechShopFloor", conn)

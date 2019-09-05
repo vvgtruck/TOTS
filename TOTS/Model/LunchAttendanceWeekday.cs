@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TOTS.Model
 {
-    public class LunchAttendenceWeekday : Weekday
+    public class LunchAttendanceWeekday : Weekday
     {
         public float PaidTime { get; set; }
 

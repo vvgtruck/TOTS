@@ -5,9 +5,9 @@ using System.Web;
 
 namespace TOTS.Model
 {
-    public class LunchAttendenceEntry : WeekdayEntry
+    public class LunchAttendanceEntry : WeekdayEntry
     {
-        public List<LunchAttendenceWeekday> lunchAttendenceWeekdays { get; set; }
+        public List<LunchAttendanceWeekday> lunchAttendanceWeekdays { get; set; }
 
         public float TLunchHours { get; set; }
 

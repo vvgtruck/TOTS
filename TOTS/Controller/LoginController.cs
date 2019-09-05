@@ -21,7 +21,8 @@ namespace TOTS.Controller
 
             LoginResponse loginResponse = new LoginResponse();
 
-            string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
+            //string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
+            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGWebApps;UID=Raj;PWD=Cascadia1234;";
 
             using (var conn = new SqlConnection(connectionString))
             using (var command = new SqlCommand("VVGWebApps_TOTSSingleLogin_Validate", conn)
@@ -106,7 +107,8 @@ namespace TOTS.Controller
 
             int updateTokenResult = 0;
 
-            string vFinConnectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGFinancial;UID=sa;PWD=Network9899;";
+            //string vFinConnectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGFinancial;UID=sa;PWD=Network9899;";
+            string vFinConnectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGFinancial;UID=Raj;PWD=Cascadia1234;";
 
             using (var conn = new SqlConnection(vFinConnectionString))
             using (var command = new SqlCommand(query, conn)
@@ -116,7 +118,7 @@ namespace TOTS.Controller
             {
                 conn.Open();
 
-                command.Parameters.AddWithValue("@authToken", loginResponse.ApiToken.Substring(0,99));
+                command.Parameters.AddWithValue("@authToken", loginResponse.ApiToken);
                 command.Parameters.AddWithValue("@dateTimeNow", dateTimeNow);
 
                 // Sample Token
