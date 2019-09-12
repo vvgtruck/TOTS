@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Waiver.aspx.cs" Inherits="TOTS.Waiver" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GenericWaiver.aspx.cs" Inherits="TOTS.Waivers.GenericWaiver" %>
 
 <!DOCTYPE html>
 
@@ -14,7 +14,7 @@
         <telerik:RadScriptManager runat="server"></telerik:RadScriptManager>
         <div>
             <img src="images/VVG-Logo.png" />
-            <h3>Meal Period Waiver
+            <h3>Time Issue Waiver
             </h3>
             <br />
             <span>California law and Velocity Vehicle Group (the "Company") policy require that employees be provided a thirty (30) minute off duty meal period whenever their work period exceeds five (5) hours in a work day.  

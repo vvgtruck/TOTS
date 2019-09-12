@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPageSingleMenu.Master" AutoEventWireup="true" CodeBehind="MyLunchViolations.aspx.cs" Inherits="TOTS.MyLunchViolations" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPageSingleMenu.Master" AutoEventWireup="true" CodeBehind="MyTimeIssues.aspx.cs" Inherits="TOTS.MyTimeIssues" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -10,13 +10,13 @@
             <%--CheckBoxes--%>
             <telerik:AjaxSetting AjaxControlID="RadButtonUpdate">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridSingleTechTimeLunchViolations" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridSingleTechTimeTimeIssues" LoadingPanelID="RadAjaxLoadingPanel1" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="RadGridSingleTechTimeLunchViolations">
+            <telerik:AjaxSetting AjaxControlID="RadGridSingleTechTimeTimeIssues">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridSingleTechTimeLunchViolations" LoadingPanelID="RadAjaxLoadingPanel1" />
-                     <telerik:AjaxUpdatedControl ControlID="RadWindowWaiver" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridSingleTechTimeTimeIssues" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadWindowWaiver" LoadingPanelID="RadAjaxLoadingPanel1" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
@@ -26,7 +26,7 @@
             <telerik:LayoutRow>
                 <Columns>
                     <telerik:LayoutColumn CssClass="jumbotron">
-                        <h1>Lunch Violations</h1>
+                        <h1>Time Issues</h1>
                     </telerik:LayoutColumn>
                 </Columns>
             </telerik:LayoutRow>
@@ -73,18 +73,18 @@
             <telerik:LayoutRow>
                 <Columns>
                     <telerik:LayoutColumn Span="12" SpanMd="12" SpanSm="12" HiddenXs="true">
-                        <telerik:RadGrid ID="RadGridSingleTechTimeLunchViolations" runat="server" DataSourceID="SelectTechTimeLunchViolations" GroupPanelPosition="Top" ShowFooter="True" OnItemCommand="RadGridSingleTechTimeLunchViolations_ItemCommand" OnItemDataBound="RadGridSingleTechTimeLunchViolations_ItemDataBound">
+                        <telerik:RadGrid ID="RadGridSingleTechTimeTimeIssues" runat="server" DataSourceID="SelectTechTimeTimeIssues" GroupPanelPosition="Top" ShowFooter="True" OnItemCommand="RadGridSingleTechTimeTimeIssues_ItemCommand" OnItemDataBound="RadGridSingleTechTimeTimeIssues_ItemDataBound">
                             <GroupingSettings RetainGroupFootersVisibility="true" />
-                            <MasterTableView AutoGenerateColumns="false" ShowGroupFooter="true" GroupsDefaultExpanded="false" Caption="Lunch Violations">
+                            <MasterTableView AutoGenerateColumns="false" ShowGroupFooter="true" GroupsDefaultExpanded="false" Caption="Lunch Issues">
                                 <Columns>
-                                    <telerik:GridBoundColumn DataField="Violation" FilterControlAltText="Filter Violation column" HeaderText="Violation" SortExpression="Violation" UniqueName="Violation">
+                                    <telerik:GridBoundColumn DataField="TimeIssue" FilterControlAltText="Filter TimeIssue column" HeaderText="Issue" SortExpression="TimeIssue" UniqueName="TimeIssue">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="ShiftStart" FilterControlAltText="Filter ShiftStart column" HeaderText="ShiftStart" SortExpression="ShiftStart" UniqueName="ShiftStart" DataType="System.DateTime">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="ShiftEnd" FilterControlAltText="Filter ShiftEnd column" HeaderText="ShiftEnd" SortExpression="ShiftEnd" UniqueName="ShiftEnd" DataType="System.DateTime">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridButtonColumn DataTextField="Acknowledgment" HeaderText="Acknowledgments"
-                                        SortExpression="AcknowledgeButton" Text="Acknowledge Violation" UniqueName="AcknowledgeButton"
+                                        SortExpression="AcknowledgeButton" Text="Acknowledge Issue" UniqueName="AcknowledgeButton"
                                         CommandName="Acknowledge">
                                     </telerik:GridButtonColumn>
                                     <telerik:GridBoundColumn DataField="Acknowledge" FilterControlAltText="Filter Acknowledge column" HeaderText="Acknowledge" ReadOnly="True" SortExpression="Acknowledge" UniqueName="Acknowledge">
@@ -94,7 +94,7 @@
                                 </Columns>
                             </MasterTableView>
                         </telerik:RadGrid>
-                        <asp:SqlDataSource ID="SelectTechTimeLunchViolations" runat="server" ConnectionString="<%$ ConnectionStrings:WebAppsConnectionString %>" SelectCommand="EXEC [VVGWebApps_SP_Service_LunchViolations_byEmp] @payrollId, @empid ">
+                        <asp:SqlDataSource ID="SelectTechTimeTimeIssues" runat="server" ConnectionString="<%$ ConnectionStrings:WebAppsConnectionString %>" SelectCommand="EXEC [VVGWebApps_SP_Service_TimeIssues_byEmp] @payrollId, @empid ">
                             <SelectParameters>
                                 <asp:ControlParameter ControlID="RadDropDownListPayPeriods" Name="payrollId" PropertyName="SelectedValue" />
                                 <asp:ControlParameter ControlID="HiddenFieldEmpIdUser" Name="empid" PropertyName="Value" />

@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TOTS {
+namespace TOTS.Waivers {
     
     
-    public partial class Waiver {
+    public partial class GenericWaiver {
         
         /// <summary>
         /// form1 control.

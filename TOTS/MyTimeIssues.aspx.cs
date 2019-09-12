@@ -11,7 +11,7 @@ using Telerik.Web.UI;
 
 namespace TOTS
 {
-    public partial class MyLunchViolations : System.Web.UI.Page
+    public partial class MyTimeIssues : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,20 +33,21 @@ namespace TOTS
                     Server.Transfer("/Default.aspx?timeout=yes");
                 }
             }
+
         }
 
         protected void RadButtonUpdate_Click(object sender, EventArgs e)
         {
-            RadGridSingleTechTimeLunchViolations.Rebind();
+            RadGridSingleTechTimeTimeIssues.Rebind();
         }
 
-        protected void RadGridSingleTechTimeLunchViolations_ItemCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e)
+        protected void RadGridSingleTechTimeTimeIssues_ItemCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e)
         {
             if (e.CommandName == "Acknowledge")
             {
                 GridDataItem item = (GridDataItem)e.Item;
 
-                string s_Violation = item["Violation"].Text;
+                string s_Violation = item["TimeIssue"].Text;
                 string s_ShiftStart = item["ShiftStart"].Text;
                 string s_ShiftEnd = item["ShiftEnd"].Text;
                 string s_EmpIdUser = HiddenFieldEmpIdUser.Value;
@@ -91,13 +92,13 @@ namespace TOTS
                     EmpId.Direction = ParameterDirection.Input;
                     command.Parameters.Add(EmpId);
 
-                    SqlParameter Violation = new SqlParameter();
-                    Violation.ParameterName = "@violation";
-                    Violation.Value = s_Violation;
-                    Violation.SqlDbType = SqlDbType.VarChar;
-                    Violation.Size = 50;
-                    Violation.Direction = ParameterDirection.Input;
-                    command.Parameters.Add(Violation);
+                    SqlParameter TimeIssue = new SqlParameter();
+                    TimeIssue.ParameterName = "@violation";
+                    TimeIssue.Value = s_Violation;
+                    TimeIssue.SqlDbType = SqlDbType.VarChar;
+                    TimeIssue.Size = 50;
+                    TimeIssue.Direction = ParameterDirection.Input;
+                    command.Parameters.Add(TimeIssue);
 
                     SqlParameter ShiftStart = new SqlParameter();
                     ShiftStart.ParameterName = "@ShiftStart";
@@ -128,12 +129,12 @@ namespace TOTS
 
                 }
                 //Refresh the grid so that the acknowledged line turns Yellow or Green.
-                RadGridSingleTechTimeLunchViolations.Rebind();
+                RadGridSingleTechTimeTimeIssues.Rebind();
 
             }
         }
 
-        protected void RadGridSingleTechTimeLunchViolations_ItemDataBound(object sender, GridItemEventArgs e)
+        protected void RadGridSingleTechTimeTimeIssues_ItemDataBound(object sender, GridItemEventArgs e)
         {
             if (e.Item is GridDataItem)
             {
@@ -142,7 +143,7 @@ namespace TOTS
 
                 if (dataBoundItem["Acknowledge"].Text == "Acknowledged" && (dataBoundItem["WaiverComplete"].Text == "Yes" || dataBoundItem["WaiverComplete"].Text == "N/A"))
                 {
-                    dataBoundItem["Violation"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
+                    dataBoundItem["TimeIssue"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
                     dataBoundItem["ShiftStart"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
                     dataBoundItem["ShiftEnd"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
                     dataBoundItem["AcknowledgeButton"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
@@ -151,7 +152,7 @@ namespace TOTS
                 }
                 else if (dataBoundItem["Acknowledge"].Text == "Acknowledged" && dataBoundItem["WaiverComplete"].Text == "No")
                 {
-                    dataBoundItem["Violation"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
+                    dataBoundItem["TimeIssue"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
                     dataBoundItem["ShiftStart"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
                     dataBoundItem["ShiftEnd"].BackColor = Color.FromArgb(255, 255, 224);  //Light Yellow
                     dataBoundItem["AcknowledgeButton"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
@@ -160,7 +161,7 @@ namespace TOTS
                 }
                 else
                 {
-                    dataBoundItem["Violation"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
+                    dataBoundItem["TimeIssue"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
                     dataBoundItem["ShiftStart"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
                     dataBoundItem["ShiftEnd"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
                     dataBoundItem["AcknowledgeButton"].BackColor = Color.FromArgb(255, 199, 206); //Light Red

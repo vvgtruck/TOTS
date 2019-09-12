@@ -133,6 +133,13 @@
     <Compile Include="MyTimeApprovals.aspx.designer.cs">
       <DependentUpon>MyTimeApprovals.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MyTimeIssues.aspx.cs">
+      <DependentUpon>MyTimeIssues.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyTimeIssues.aspx.designer.cs">
+      <DependentUpon>MyTimeIssues.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MyTimeSheet.aspx.cs">
       <DependentUpon>MyTimeSheet.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -161,6 +168,20 @@
     </Compile>
     <Compile Include="Waiver.aspx.designer.cs">
       <DependentUpon>Waiver.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Waivers\FederalLunchLess30Waiver.aspx.cs">
+      <DependentUpon>FederalLunchLess30Waiver.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Waivers\FederalLunchLess30Waiver.aspx.designer.cs">
+      <DependentUpon>FederalLunchLess30Waiver.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Waivers\GenericWaiver.aspx.cs">
+      <DependentUpon>GenericWaiver.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Waivers\GenericWaiver.aspx.designer.cs">
+      <DependentUpon>GenericWaiver.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -207,6 +228,7 @@
     <Content Include="MyLunchViolations.aspx" />
     <Content Include="MyOpenWork.aspx" />
     <Content Include="MyTimeApprovals.aspx" />
+    <Content Include="MyTimeIssues.aspx" />
     <Content Include="MyTimeSheet.aspx" />
     <Content Include="Styles\base.css" />
     <Content Include="Styles\Custom.css" />
@@ -225,6 +247,8 @@
   <ItemGroup>
     <Content Include="ToTSStyle.css" />
     <Content Include="Waiver.aspx" />
+    <Content Include="Waivers\FederalLunchLess30Waiver.aspx" />
+    <Content Include="Waivers\GenericWaiver.aspx" />
     <Content Include="web.config" />
     <Content Include="SingleLogin.Master" />
     <Content Include="MasterPageSingleMenu.Master" />
