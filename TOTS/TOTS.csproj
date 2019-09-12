@@ -145,6 +145,7 @@
       <DependentUpon>MasterPageSingleMenu.Master</DependentUpon>
     </Compile>
     <Compile Include="Model\LunchAttendance.cs" />
+    <Compile Include="Model\LunchViolation.cs" />
     <Compile Include="Model\ShopFloor.cs" />
     <Compile Include="Model\ShopFloorEntry.cs" />
     <Compile Include="Model\LunchAttendanceEntry.cs" />
@@ -152,8 +153,10 @@
     <Compile Include="Model\PayPeriod.cs" />
     <Compile Include="Model\ShopFloorWeekday.cs" />
     <Compile Include="Model\TechTimeSheetCalc.cs" />
+    <Compile Include="Model\TimeApproval.cs" />
     <Compile Include="Model\Weekday.cs" />
     <Compile Include="Model\WeekdayEntry.cs" />
+    <Compile Include="Model\WorkProductionBonus.cs" />
     <Compile Include="MyLunchViolations.aspx.cs">
       <DependentUpon>MyLunchViolations.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -317,7 +320,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

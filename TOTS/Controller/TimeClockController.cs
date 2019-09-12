@@ -444,6 +444,205 @@ namespace TOTS.Controller
             return Request.CreateResponse(HttpStatusCode.OK, shopFloor, Configuration.Formatters.JsonFormatter);
         }
 
+        // GET api/<controller>/<action>
+        [Route("api/timeclock/work/productionbonus")]
+        public HttpResponseMessage GetTechWorkProductionBonus([FromUri]string payperiod_id, [FromUri]string emp_id)
+        {
+
+            List<WorkProductionBonus> workProductionBonuses = new List<WorkProductionBonus>();
+
+            //string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
+            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGWebApps;UID=Raj;PWD=Cascadia1234;";
+
+            using (var conn = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("VVGWebApps_SP_Service_SelectTechTimeSingleTechProdBonus", conn)
+            {
+                CommandType = CommandType.StoredProcedure
+            })
+            {
+                conn.Open();
+
+                // Add input parameter
+
+                SqlParameter EmpId = new SqlParameter();
+                EmpId.ParameterName = "@EmpId";
+                EmpId.Value = emp_id;
+                EmpId.SqlDbType = SqlDbType.VarChar;
+                EmpId.Size = 25;
+                EmpId.Direction = ParameterDirection.Input;
+                command.Parameters.Add(EmpId);
+
+                SqlParameter PayperiodId = new SqlParameter();
+                PayperiodId.ParameterName = "@payrollId";
+                PayperiodId.Value = payperiod_id;
+                PayperiodId.SqlDbType = SqlDbType.Int;
+                PayperiodId.Size = 25;
+                PayperiodId.Direction = ParameterDirection.Input;
+                command.Parameters.Add(PayperiodId);
+
+                // execute the command
+                using (SqlDataReader rdr = command.ExecuteReader())
+                {
+                    int i = 0;
+
+                    while(rdr.Read())
+                    {
+                        WorkProductionBonus workProductionBonus = new WorkProductionBonus();
+                        workProductionBonus.Type = rdr["Type"].ToString();
+                        string dateInvoice = rdr["DateInvoice"].ToString();
+
+                        if(dateInvoice.Equals(""))
+                        {
+                            workProductionBonus.DateInvoice = "";
+                        }
+                        else
+                        {
+                            DateTime _date = DateTime.Parse(dateInvoice);
+                            string _dateInFormat = _date.ToString("MM/dd/yyyy");
+                            workProductionBonus.DateInvoice = _dateInFormat;
+                        }
+                        workProductionBonus.SlsId = rdr["SlsId"].ToString();
+                        workProductionBonus.OpsId = Int32.Parse(rdr["OpsId"].ToString());
+                        workProductionBonus.CusName = rdr["CusName"].ToString();
+                        workProductionBonus.SvItm = rdr["SvItm"].ToString();
+                        workProductionBonus.Des = rdr["Des"].ToString();
+                        workProductionBonus.HrsBill = float.Parse(rdr["HrsBill"].ToString());
+                        workProductionBonus.HrsActual = float.Parse(rdr["HrsActual"].ToString());
+                        workProductionBonus.Difference = float.Parse(rdr["Difference"].ToString());
+
+                        workProductionBonuses.Add(workProductionBonus);
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, workProductionBonuses, Configuration.Formatters.JsonFormatter);
+        }
+
+        // GET api/<controller>/<action>
+        [Route("api/timeclock/timeapproval")]
+        public HttpResponseMessage GetTimeApprovalList([FromUri]string payperiod_id, [FromUri]string emp_id)
+        {
+
+            List<TimeApproval> timeApprovals = new List<TimeApproval>();
+
+            //string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
+            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGWebApps;UID=Raj;PWD=Cascadia1234;";
+
+            using (var conn = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("VVGWebApps_SP_Service_SelectTechTimeSingleTechApprovalV2", conn)
+            {
+                CommandType = CommandType.StoredProcedure
+            })
+            {
+                conn.Open();
+
+                // Add input parameter
+
+                SqlParameter EmpId = new SqlParameter();
+                EmpId.ParameterName = "@EmpId";
+                EmpId.Value = emp_id;
+                EmpId.SqlDbType = SqlDbType.VarChar;
+                EmpId.Size = 25;
+                EmpId.Direction = ParameterDirection.Input;
+                command.Parameters.Add(EmpId);
+
+                SqlParameter PayperiodId = new SqlParameter();
+                PayperiodId.ParameterName = "@payrollId";
+                PayperiodId.Value = payperiod_id;
+                PayperiodId.SqlDbType = SqlDbType.Int;
+                PayperiodId.Size = 25;
+                PayperiodId.Direction = ParameterDirection.Input;
+                command.Parameters.Add(PayperiodId);
+
+                // execute the command
+                using (SqlDataReader rdr = command.ExecuteReader())
+                {
+                    int i = 0;
+
+                    while (rdr.Read())
+                    {
+                        TimeApproval timeApproval = new TimeApproval();
+                        timeApproval.Weekday = rdr["Weekday"].ToString();
+                        timeApproval.Lunch = float.Parse(rdr["Lunch"].ToString());
+                        timeApproval.Attendance = float.Parse(rdr["Attendence"].ToString());
+                        timeApproval.Shop = float.Parse(rdr["Shop"].ToString());
+                        timeApproval.Approval = rdr["Approval"].ToString();
+                        
+                        timeApprovals.Add(timeApproval);
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, timeApprovals, Configuration.Formatters.JsonFormatter);
+        }
+
+        // GET api/<controller>/<action>
+        [Route("api/timeclock/lunchviolation")]
+        public HttpResponseMessage GetLunchViolationList([FromUri]string payperiod_id, [FromUri]string emp_id)
+        {
+
+            List<LunchViolation> timeApprovals = new List<LunchViolation>();
+
+            //string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
+            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGWebApps;UID=Raj;PWD=Cascadia1234;";
+
+            using (var conn = new SqlConnection(connectionString))
+            using (var command = new SqlCommand("VVGWebApps_SP_Service_LunchViolations_byEmp", conn)
+            {
+                CommandType = CommandType.StoredProcedure
+            })
+            {
+                conn.Open();
+
+                // Add input parameter
+
+                SqlParameter EmpId = new SqlParameter();
+                EmpId.ParameterName = "@EmpId";
+                EmpId.Value = emp_id;
+                EmpId.SqlDbType = SqlDbType.VarChar;
+                EmpId.Size = 25;
+                EmpId.Direction = ParameterDirection.Input;
+                command.Parameters.Add(EmpId);
+
+                SqlParameter PayperiodId = new SqlParameter();
+                PayperiodId.ParameterName = "@payrollId";
+                PayperiodId.Value = payperiod_id;
+                PayperiodId.SqlDbType = SqlDbType.Int;
+                PayperiodId.Size = 25;
+                PayperiodId.Direction = ParameterDirection.Input;
+                command.Parameters.Add(PayperiodId);
+
+                // execute the command
+                using (SqlDataReader rdr = command.ExecuteReader())
+                {
+                    int i = 0;
+
+                    while (rdr.Read())
+                    {
+                        LunchViolation lunchViolation = new LunchViolation();
+                        lunchViolation.Violation = rdr["Violation"].ToString();
+                        lunchViolation.ShiftStart = rdr["ShiftStart"].ToString();
+                        lunchViolation.ShiftEnd = rdr["ShiftEnd"].ToString();
+                        lunchViolation.Acknowledge = rdr["Acknowledge"].ToString();
+                        lunchViolation.Waiver = rdr["Waiver"].ToString();
+                        lunchViolation.WaiverSigned = rdr["WaiverSigned"].ToString();
+                        lunchViolation.WaiverRevoke = rdr["WaiverRevoke"].ToString();
+                        lunchViolation.WaiverComplete = rdr["WaiverComplete"].ToString();
+
+                        timeApprovals.Add(lunchViolation);
+                    }
+                }
+
+                conn.Close();
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, timeApprovals, Configuration.Formatters.JsonFormatter);
+        }
+
         // GET api/<controller>
         [Route("api/timeclock/getdata")]
         public IEnumerable<string> GetData()
