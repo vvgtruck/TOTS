@@ -43,10 +43,36 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.5.0\lib\net45\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.5.0\lib\net45\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.5.0\lib\net45\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.5.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -84,12 +110,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\APIConfig.cs" />
+    <Compile Include="Controller\LoginController.cs" />
+    <Compile Include="Controller\TimeClockController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
@@ -112,6 +144,19 @@
     <Compile Include="MasterPageSingleMenu.Master.designer.cs">
       <DependentUpon>MasterPageSingleMenu.Master</DependentUpon>
     </Compile>
+    <Compile Include="Model\LunchAttendance.cs" />
+    <Compile Include="Model\LunchViolation.cs" />
+    <Compile Include="Model\ShopFloor.cs" />
+    <Compile Include="Model\ShopFloorEntry.cs" />
+    <Compile Include="Model\LunchAttendanceEntry.cs" />
+    <Compile Include="Model\LunchAttendanceWeekday.cs" />
+    <Compile Include="Model\PayPeriod.cs" />
+    <Compile Include="Model\ShopFloorWeekday.cs" />
+    <Compile Include="Model\TechTimeSheetCalc.cs" />
+    <Compile Include="Model\TimeApproval.cs" />
+    <Compile Include="Model\Weekday.cs" />
+    <Compile Include="Model\WeekdayEntry.cs" />
+    <Compile Include="Model\WorkProductionBonus.cs" />
     <Compile Include="MyLunchViolations.aspx.cs">
       <DependentUpon>MyLunchViolations.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -162,6 +207,7 @@
     <Compile Include="TimeSheet.aspx.designer.cs">
       <DependentUpon>TimeSheet.aspx</DependentUpon>
     </Compile>
+    <Compile Include="TokenValidationHandler.cs" />
     <Compile Include="Waiver.aspx.cs">
       <DependentUpon>Waiver.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -222,6 +268,7 @@
     <Content Include="App_Data\RadCaptcha\Y.wav" />
     <Content Include="App_Data\RadCaptcha\Z.wav" />
     <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
     <Content Include="images\VVG-Logo.png" />
     <Content Include="InternalVVG.css" />
@@ -253,6 +300,7 @@
     <Content Include="SingleLogin.Master" />
     <Content Include="MasterPageSingleMenu.Master" />
     <Content Include="MasterPage.Master" />
+    <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\Tots.pubxml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -296,7 +344,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
