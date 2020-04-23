@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace TOTS.Waivers
 {
-    public partial class FederalLunchLess30Waiver : System.Web.UI.Page
+    public partial class Waiver_CA_10to12 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -47,36 +47,18 @@ namespace TOTS
             {
                 GridDataItem item = (GridDataItem)e.Item;
 
-                string s_Violation = item["TimeIssue"].Text;
+                string s_Issue = item["Issue"].Text;
                 string s_ShiftStart = item["ShiftStart"].Text;
-                string s_ShiftEnd = item["ShiftEnd"].Text;
+                string s_BrnId = item["BrnId"].Text;
                 string s_EmpIdUser = HiddenFieldEmpIdUser.Value;
+                string s_Response = "Yes";
 
-                int Waivable = 0;
-
-                if (s_Violation.Contains("Waiver?") == true)
-
-                {
-                    Waivable = 1;
-                }
-
-                //Only pop up box if the violation is waivable?
-                if (Waivable == 1)
-                {
-                    RadWindow window = new RadWindow();
-                    window.ID = "RadWindowWaiver";
-                    window.VisibleStatusbar = false;
-                    window.VisibleOnPageLoad = true;
-                    window.Height = 700;
-                    window.Width = 900;
-                    window.NavigateUrl = "/Waiver.aspx";
-                    RadWindowWaiver.Controls.Add(window);
-                }
+                DateTime dt_ShiftStart = DateTime.Parse(s_ShiftStart);
 
                 //Exec Code for adding acknowledgement if it's waivable, mark it on the SQL table (Waiver = 1).
-                string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=Excede;UID=sa;PWD=Network9899;";
+                string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGTechnician;UID=sa;PWD=Network9899;";
                 using (var conn = new SqlConnection(connectionString))
-                using (var command = new SqlCommand("user_sp_VVGDev_TOTS_AcknowledgeSingleViolation", conn)
+                using (var command = new SqlCommand("App_SingleTechTimeIssue_Response", conn)
                 {
                     CommandType = CommandType.StoredProcedure
                 })
@@ -92,34 +74,36 @@ namespace TOTS
                     EmpId.Direction = ParameterDirection.Input;
                     command.Parameters.Add(EmpId);
 
-                    SqlParameter TimeIssue = new SqlParameter();
-                    TimeIssue.ParameterName = "@violation";
-                    TimeIssue.Value = s_Violation;
-                    TimeIssue.SqlDbType = SqlDbType.VarChar;
-                    TimeIssue.Size = 50;
-                    TimeIssue.Direction = ParameterDirection.Input;
-                    command.Parameters.Add(TimeIssue);
+                    SqlParameter BrnId = new SqlParameter();
+                    BrnId.ParameterName = "@violation";
+                    BrnId.Value = s_BrnId;
+                    BrnId.SqlDbType = SqlDbType.VarChar;
+                    BrnId.Size = 3;
+                    BrnId.Direction = ParameterDirection.Input;
+                    command.Parameters.Add(BrnId);
 
                     SqlParameter ShiftStart = new SqlParameter();
                     ShiftStart.ParameterName = "@ShiftStart";
-                    ShiftStart.Value = DateTime.Parse(s_ShiftStart);
+                    ShiftStart.Value = dt_ShiftStart;
                     ShiftStart.SqlDbType = SqlDbType.DateTime;
                     ShiftStart.Direction = ParameterDirection.Input;
                     command.Parameters.Add(ShiftStart);
 
-                    SqlParameter ShiftEnd = new SqlParameter();
-                    ShiftEnd.ParameterName = "@ShiftEnd";
-                    ShiftEnd.Value = DateTime.Parse(s_ShiftEnd);
-                    ShiftEnd.SqlDbType = SqlDbType.DateTime;
-                    ShiftEnd.Direction = ParameterDirection.Input;
-                    command.Parameters.Add(ShiftEnd);
+                    SqlParameter Issue = new SqlParameter();
+                    Issue.ParameterName = "@Violation";
+                    Issue.Value = s_Issue;
+                    Issue.SqlDbType = SqlDbType.VarChar;
+                    Issue.Size = 100;
+                    Issue.Direction = ParameterDirection.Input;
+                    command.Parameters.Add(Issue);
 
-                    SqlParameter sqlWaivable = new SqlParameter();
-                    sqlWaivable.ParameterName = "@Waivable";
-                    sqlWaivable.Value = Waivable;
-                    sqlWaivable.SqlDbType = SqlDbType.Bit;
-                    sqlWaivable.Direction = ParameterDirection.Input;
-                    command.Parameters.Add(sqlWaivable);
+                    SqlParameter Response = new SqlParameter();
+                    Response.ParameterName = "@Response";
+                    Response.Value = s_Response;
+                    Response.SqlDbType = SqlDbType.VarChar;
+                    Response.Size = 100;
+                    Response.Direction = ParameterDirection.Input;
+                    command.Parameters.Add(Response);
 
                     //execute
                     command.ExecuteNonQuery();
@@ -128,6 +112,7 @@ namespace TOTS
                     conn.Dispose();
 
                 }
+
                 //Refresh the grid so that the acknowledged line turns Yellow or Green.
                 RadGridSingleTechTimeTimeIssues.Rebind();
 
@@ -144,27 +129,27 @@ namespace TOTS
                 if (dataBoundItem["Acknowledge"].Text == "Acknowledged" && (dataBoundItem["WaiverComplete"].Text == "Yes" || dataBoundItem["WaiverComplete"].Text == "N/A"))
                 {
                     dataBoundItem["TimeIssue"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
-                    dataBoundItem["ShiftStart"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
-                    dataBoundItem["ShiftEnd"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
-                    dataBoundItem["AcknowledgeButton"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
+                    //dataBoundItem["ShiftStart"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
+                    //dataBoundItem["ShiftEnd"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
+                    //dataBoundItem["AcknowledgeButton"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
                     dataBoundItem["Acknowledge"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
                     dataBoundItem["WaiverComplete"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
                 }
-                else if (dataBoundItem["Acknowledge"].Text == "Acknowledged" && dataBoundItem["WaiverComplete"].Text == "No")
+                else if (dataBoundItem["Acknowledge"].Text == "Acknowledged") 
                 {
-                    dataBoundItem["TimeIssue"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
-                    dataBoundItem["ShiftStart"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
-                    dataBoundItem["ShiftEnd"].BackColor = Color.FromArgb(255, 255, 224);  //Light Yellow
-                    dataBoundItem["AcknowledgeButton"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
+                    dataBoundItem["Issue"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
+                    //dataBoundItem["ShiftStart"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
+                    //dataBoundItem["ShiftEnd"].BackColor = Color.FromArgb(255, 255, 224);  //Light Yellow
+                    //dataBoundItem["AcknowledgeButton"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
                     dataBoundItem["Acknowledge"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
                     dataBoundItem["WaiverComplete"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
                 }
                 else
                 {
                     dataBoundItem["TimeIssue"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
-                    dataBoundItem["ShiftStart"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
-                    dataBoundItem["ShiftEnd"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
-                    dataBoundItem["AcknowledgeButton"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
+                    //dataBoundItem["ShiftStart"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
+                    //dataBoundItem["ShiftEnd"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
+                    //dataBoundItem["AcknowledgeButton"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
                     dataBoundItem["Acknowledge"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
                     dataBoundItem["WaiverComplete"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
                 }

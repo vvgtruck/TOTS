@@ -215,19 +215,40 @@
     <Compile Include="Waiver.aspx.designer.cs">
       <DependentUpon>Waiver.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Waivers\FederalLunchLess30Waiver.aspx.cs">
-      <DependentUpon>FederalLunchLess30Waiver.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Waivers\FederalLunchLess30Waiver.aspx.designer.cs">
-      <DependentUpon>FederalLunchLess30Waiver.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Waivers\GenericWaiver.aspx.cs">
       <DependentUpon>GenericWaiver.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Waivers\GenericWaiver.aspx.designer.cs">
       <DependentUpon>GenericWaiver.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Waivers\Waiver-CA-10to12.aspx.cs">
+      <DependentUpon>Waiver-CA-10to12.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Waivers\Waiver-CA-10to12.aspx.designer.cs">
+      <DependentUpon>Waiver-CA-10to12.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Waivers\Waiver-CA-LessThenSix.aspx.cs">
+      <DependentUpon>Waiver-CA-LessThenSix.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Waivers\Waiver-CA-LessThenSix.aspx.designer.cs">
+      <DependentUpon>Waiver-CA-LessThenSix.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Waivers\Waiver-NV-30MinuteMeal.aspx.cs">
+      <DependentUpon>Waiver-NV-30MinuteMeal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Waivers\Waiver-NV-30MinuteMeal.aspx.designer.cs">
+      <DependentUpon>Waiver-NV-30MinuteMeal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Waivers\Waiver-RevokeBlanketMeal.aspx.cs">
+      <DependentUpon>Waiver-RevokeBlanketMeal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Waivers\Waiver-RevokeBlanketMeal.aspx.designer.cs">
+      <DependentUpon>Waiver-RevokeBlanketMeal.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -294,9 +315,14 @@
   <ItemGroup>
     <Content Include="ToTSStyle.css" />
     <Content Include="Waiver.aspx" />
-    <Content Include="Waivers\FederalLunchLess30Waiver.aspx" />
     <Content Include="Waivers\GenericWaiver.aspx" />
-    <Content Include="web.config" />
+    <Content Include="Waivers\Waiver-CA-10to12.aspx" />
+    <Content Include="Waivers\Waiver-CA-LessThenSix.aspx" />
+    <Content Include="Waivers\Waiver-NV-30MinuteMeal.aspx" />
+    <Content Include="Waivers\Waiver-RevokeBlanketMeal.aspx" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="SingleLogin.Master" />
     <Content Include="MasterPageSingleMenu.Master" />
     <Content Include="MasterPage.Master" />

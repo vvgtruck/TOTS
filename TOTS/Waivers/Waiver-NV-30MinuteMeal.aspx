@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FederalLunchLess30Waiver.aspx.cs" Inherits="TOTS.Waivers.FederalLunchLess30Waiver" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Waiver-NV-30MinuteMeal.aspx.cs" Inherits="TOTS.Waivers.Waiver_NV_30MinuteMeal" %>
 
 <!DOCTYPE html>
 

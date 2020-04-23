@@ -58,7 +58,7 @@
                             <tr>
                                 <td>
                                     <telerik:RadDropDownList ID="RadDropDownListPayPeriods" runat="server" DataSourceID="SqlDataSourcePayPeriods" DataTextField="Des" DataValueField="payrollId" Width="400px"></telerik:RadDropDownList>
-                                    <asp:SqlDataSource ID="SqlDataSourcePayPeriods" runat="server" ConnectionString="<%$ ConnectionStrings:WebAppsConnectionString %>" SelectCommand="EXEC [VVGWebApps_SP_Service_SelectPayrollPeriods]" ProviderName="<%$ ConnectionStrings:WebAppsConnectionString.ProviderName %>"></asp:SqlDataSource>
+                                    <asp:SqlDataSource ID="SqlDataSourcePayPeriods" runat="server" ConnectionString="<%$ ConnectionStrings:VVGTechnicianConnectionString %>" SelectCommand="EXEC [App_SelectPayrollPeriods]" ProviderName="<%$ ConnectionStrings:VVGTechnicianConnectionString.ProviderName %>"></asp:SqlDataSource>
                                 </td>
                                 <td>
                                     <telerik:RadButton ID="RadButtonUpdate" runat="server" Text="Update" OnClick="RadButtonUpdate_Click"></telerik:RadButton>
@@ -113,7 +113,7 @@
                                 </Columns>
                             </MasterTableView>
                         </telerik:RadGrid>
-                        <asp:SqlDataSource ID="SelectTechTimeSingleTechProdBonus" runat="server" ConnectionString="<%$ ConnectionStrings:WebAppsConnectionString %>" SelectCommand="EXEC [VVGWebApps_SP_Service_SelectTechTimeSingleTechProdBonus] @payrollId = @payrollId, @empid = @empid ">
+                        <asp:SqlDataSource ID="SelectTechTimeSingleTechProdBonus" runat="server" ConnectionString="<%$ ConnectionStrings:VVGTechnicianConnectionString %>" SelectCommand="EXEC [App_SingleTechProdBonus] @payrollId, @empid ">
                             <SelectParameters>
                                 <asp:ControlParameter ControlID="RadDropDownListPayPeriods" Name="payrollId" PropertyName="SelectedValue" />
                                 <asp:ControlParameter ControlID="HiddenFieldEmpIdUser" Name="empid" PropertyName="Value" />

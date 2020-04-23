@@ -55,8 +55,8 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <telerik:RadDropDownList ID="RadDropDownListPayPeriods" runat="server" DataSourceID="SqlDataSourcePayPeriods" DataTextField="Des" DataValueField="payrollId" Width="400px"></telerik:RadDropDownList>
-                                    <asp:SqlDataSource ID="SqlDataSourcePayPeriods" runat="server" ConnectionString="<%$ ConnectionStrings:WebAppsConnectionString %>" SelectCommand="EXEC [VVGWebApps_SP_Service_SelectPayrollPeriods]" ProviderName="<%$ ConnectionStrings:WebAppsConnectionString.ProviderName %>"></asp:SqlDataSource>
+                                    <telerik:RadDropDownList ID="RadDropDownListPayPeriods" runat="server" DataSourceID="SqlDataSourcePayPeriods" DataTextField="Des" DataValueField="payrollId" Width="500px"></telerik:RadDropDownList>
+                                    <asp:SqlDataSource ID="SqlDataSourcePayPeriods" runat="server" ConnectionString="<%$ ConnectionStrings:VVGTechnicianConnectionString %>" SelectCommand="EXEC [App_SelectPayrollPeriods]" ProviderName="<%$ ConnectionStrings:VVGTechnicianConnectionString.ProviderName %>"></asp:SqlDataSource>
                                 </td>
                                 <td>
                                     <telerik:RadButton ID="RadButtonUpdate" runat="server" Text="Update" OnClick="RadButtonUpdate_Click"></telerik:RadButton>
@@ -67,9 +67,7 @@
                             <asp:HiddenField ID="HiddenFieldEmpIdUser" runat="server" />
                             <asp:HiddenField ID="HiddenFieldEmpNameUser" runat="server" />
                             <asp:HiddenField ID="HiddenFieldWspIdUser" runat="server" />
-
                         </div>
-
                     </telerik:LayoutColumn>
                 </Columns>
             </telerik:LayoutRow>
@@ -219,11 +217,11 @@
                                 </table>
                             </ItemTemplate>
                         </telerik:RadDataForm>
-                        <asp:SqlDataSource ID="SqlDataSourceTechTimeCalc" runat="server" ConnectionString="<%$ ConnectionStrings:VVGExcedeConnectionString %>" SelectCommand="EXEC [user_sp_VVGDev_TTS_ServiceTechnicianTimeCalc] @payrollId = @payrollId,@techtype=@techtype,@brnid=@brnid, @empid=@empid">
+                        <asp:SqlDataSource ID="SqlDataSourceTechTimeCalc" runat="server" ConnectionString="<%$ ConnectionStrings:VVGTechnicianConnectionString %>" SelectCommand="EXEC [App_TechnicianTimeCalc] @payrollId, @brnid, @techtype, @empid">
                             <SelectParameters>
                                 <asp:ControlParameter ControlID="RadDropDownListPayPeriods" Name="payrollId" PropertyName="SelectedValue" />
-                                <asp:Parameter DefaultValue="0" Name="techtype" />
                                 <asp:Parameter DefaultValue="000" Name="brnid" />
+                                <asp:Parameter DefaultValue="0" Name="techtype" />
                                 <asp:ControlParameter ControlID="HiddenFieldEmpIdUser" Name="empid" PropertyName="Value" />
                             </SelectParameters>
                         </asp:SqlDataSource>

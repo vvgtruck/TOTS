@@ -12,16 +12,18 @@
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGridSingleTechTimeAttendence" LoadingPanelID="RadAjaxLoadingPanel1" />
                     <telerik:AjaxUpdatedControl ControlID="TimeApproval" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDataFormTechTime" LoadingPanelID="RadAjaxLoadingPanel1" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
+
             <telerik:AjaxSetting AjaxControlID="RadGridSingleTechTimeAttendence">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGridSingleTechTimeAttendence" LoadingPanelID="RadAjaxLoadingPanel1" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="RadDropDownListApproval">
+            <telerik:AjaxSetting AjaxControlID="RadDataFormTechTime">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="TimeApprovalReason" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDataFormTechTime" LoadingPanelID="RadAjaxLoadingPanel1" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
@@ -53,7 +55,7 @@
                             <tr>
                                 <td>
                                     <telerik:RadDropDownList ID="RadDropDownListPayPeriods" runat="server" DataSourceID="SqlDataSourcePayPeriods" DataTextField="Des" DataValueField="payrollId" Width="400px"></telerik:RadDropDownList>
-                                    <asp:SqlDataSource ID="SqlDataSourcePayPeriods" runat="server" ConnectionString="<%$ ConnectionStrings:WebAppsConnectionString %>" SelectCommand="EXEC [VVGWebApps_SP_Service_SelectPayrollPeriods]" ProviderName="<%$ ConnectionStrings:WebAppsConnectionString.ProviderName %>"></asp:SqlDataSource>
+                                    <asp:SqlDataSource ID="SqlDataSourcePayPeriods" runat="server" ConnectionString="<%$ ConnectionStrings:VVGTechnicianConnectionString %>" SelectCommand="EXEC [App_SelectPayrollPeriods]" ProviderName="<%$ ConnectionStrings:VVGTechnicianConnectionString.ProviderName %>"></asp:SqlDataSource>
                                 </td>
                                 <td>
                                     <telerik:RadButton ID="RadButtonUpdate" runat="server" Text="Update" OnClick="RadButtonUpdate_Click"></telerik:RadButton>
@@ -65,6 +67,170 @@
                             <asp:HiddenField ID="HiddenFieldEmpNameUser" runat="server" />
                             <asp:HiddenField ID="HiddenFieldWspIdUser" runat="server" />
                         </div>
+                    </telerik:LayoutColumn>
+                </Columns>
+            </telerik:LayoutRow>
+            <telerik:LayoutRow>
+                <Columns>
+                    <telerik:LayoutColumn>
+                        <telerik:RadDataForm ID="RadDataFormTechTime" runat="server" DataSourceID="SqlDataSourceTechTimeCalc">
+                            <ItemTemplate>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td valign="Top">
+                                            <h4>Information
+                                            </h4>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 60%">Technician Name
+                                                    </td>
+                                                    <td style="width: 40%">
+                                                        <%# Eval("Name") %>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Excede EmpId
+                                                    </td>
+                                                    <td>
+                                                        <%# Eval("EmpId") %>
+                                                    </td>
+                                                </tr>
+                                                <%--                                                <tr>
+                                                    <td>Idle Rate
+                                                    </td>
+                                                    <td>
+                                                        <%# String.Format("{0:C}", Eval("IdleRate") ) %>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Floor Rate
+                                                    </td>
+                                                    <td>
+                                                        <%# String.Format("{0:C}", Eval("ShopRate") ) %>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Weighted Rate
+                                                    </td>
+                                                    <td>
+                                                        <%# String.Format("{0:C}", Eval("WeightedRate") ) %>
+                                                    </td>
+                                                </tr>--%>
+                                            </table>
+                                        </td>
+                                        <td valign="Top">
+                                            <h4>Performance Indicators
+                                            </h4>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 75%">Labor Completed (Billed)
+                                                    </td>
+                                                    <td style="width: 25%">
+                                                        <%# Eval("LaborGuideBill") %> Hrs
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Labor Completed (Actual)
+                                                    </td>
+                                                    <td>
+                                                        <%# Eval("LaborGuideActual") %> Hrs
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Efficiency
+                                                    </td>
+                                                    <td>
+                                                        <%# String.Format("{0:P}", Eval("Efficiency") ) %>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Productivity
+                                                    </td>
+                                                    <td>
+                                                        <%# String.Format("{0:P}", Eval("Productivity") ) %>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>Production Time
+                                                    </td>
+                                                    <td>
+                                                        <%# String.Format("{0:0.00}", Eval("ProductionTime") ) %> Hrs
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td valign="Top">
+                                            <h4>Clocked Hours
+                                            </h4>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 75%">Attendence Time
+                                                    </td>
+                                                    <td style="width: 25%">
+                                                        <%# string.Format("{0:0.00}",(decimal.Parse((Eval("AttendenceWeek1","{0:0.00}"))) + decimal.Parse((Eval("AttendenceWeek2","{0:0.00}")))))   %> Hrs
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Over Time 
+                                                    </td>
+                                                    <td>
+                                                        <%# string.Format("{0:0.00}",(decimal.Parse((Eval("OverTimeWeek1","{0:0.00}"))) + decimal.Parse((Eval("OverTimeWeek2","{0:0.00}")))))   %> Hrs
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Double Time 
+                                                    </td>
+                                                    <td>
+                                                        <%# string.Format("{0:0.00}",(decimal.Parse((Eval("DoubleTimeWeek1","{0:0.00}"))) + decimal.Parse((Eval("DoubleTimeWeek2","{0:0.00}")))))   %> Hrs
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Idle Time</td>
+                                                    <td>
+                                                        <%# string.Format("{0:0.00}",(decimal.Parse((Eval("IdleTimeWeek1","{0:0.00}"))) + decimal.Parse((Eval("IdleTimeWeek2","{0:0.00}")))))   %> Hrs
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <%--                         <td valign="Top">
+                                            <h4>Pay Estimates
+                                            </h4>
+                                            <table>
+                                                <tr>
+                                                    <td style="width: 75%">Regular Pay</td>
+                                                    <td style="width: 25%"><%# String.Format("{0:C}", Eval("RegPay") ) %></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Overtime Pay</td>
+                                                    <td><%# String.Format("{0:C}", Eval("OvertimePay") ) %></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Idle Pay</td>
+                                                    <td><%# String.Format("{0:C}", Eval("IdlePay") ) %></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Production Bonus</td>
+                                                    <td><%# String.Format("{0:C}", Eval("ProductionBonus") ) %></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Estimated Total Pay</td>
+                                                    <td><%# String.Format("{0:C}", Eval("PayTotal") ) %></td>
+                                                </tr>
+                                            </table>
+                                        </td>--%>
+                                    </tr>
+                                </table>
+                            </ItemTemplate>
+                        </telerik:RadDataForm>
+                        <asp:SqlDataSource ID="SqlDataSourceTechTimeCalc" runat="server" ConnectionString="<%$ ConnectionStrings:VVGTechnicianConnectionString %>" SelectCommand="EXEC [App_TechnicianTimeCalc] @payrollId, @brnid, @techtype, @empid">
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="RadDropDownListPayPeriods" Name="payrollId" PropertyName="SelectedValue" />
+                                <asp:Parameter DefaultValue="000" Name="brnid" />
+                                <asp:Parameter DefaultValue="0" Name="techtype" />
+                                <asp:ControlParameter ControlID="HiddenFieldEmpIdUser" Name="empid" PropertyName="Value" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
                     </telerik:LayoutColumn>
                 </Columns>
             </telerik:LayoutRow>
@@ -84,7 +250,7 @@
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="Shop" DataType="System.Decimal" FilterControlAltText="Filter Shop column" HeaderText="Shop Time" ReadOnly="True" SortExpression="Shop" UniqueName="Shop" DataFormatString="{0:0.00}" Aggregate="Sum">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridCalculatedColumn DataFields="Attendence,Shop" Expression="{0}-{1}" HeaderText="Idle Time" UniqueName="Idle" DataFormatString="{0:0.00}" DataType="System.Decimal">
+                                    <telerik:GridCalculatedColumn DataFields="Attendence,Shop" Expression="{0}-{1}" HeaderText="Idle Time" UniqueName="Idle" DataFormatString="{0:0.00}" DataType="System.Decimal" Aggregate="Sum">
                                     </telerik:GridCalculatedColumn>
                                     <telerik:GridButtonColumn HeaderText="Approve"
                                         SortExpression="Approve" Text="Approve Day" UniqueName="Approve"
@@ -92,69 +258,20 @@
                                     </telerik:GridButtonColumn>
                                     <telerik:GridBoundColumn DataField="Approval" FilterControlAltText="Filter Approval column" HeaderText="Approval" ReadOnly="True" SortExpression="Approval" UniqueName="Approval">
                                     </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="ApproveTime" FilterControlAltText="Filter ApproveTime column" HeaderText="Approved on:" ReadOnly="True" SortExpression="ApproveTime" UniqueName="ApproveTime">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="ApproveName" FilterControlAltText="Filter ApproveName column" HeaderText="Approved By:" ReadOnly="True" SortExpression="ApproveName" UniqueName="ApproveName">
+                                    </telerik:GridBoundColumn>
                                 </Columns>
                             </MasterTableView>
                         </telerik:RadGrid>
-                        <asp:SqlDataSource ID="SelectTechTimeSingleTechAttendance" runat="server" ConnectionString="<%$ ConnectionStrings:WebAppsConnectionString %>" SelectCommand="EXEC [VVGWebApps_SP_Service_SelectTechTimeSingleTechApprovalV2] @empid, @payrollId">
+                        <asp:SqlDataSource ID="SelectTechTimeSingleTechAttendance" runat="server" ConnectionString="<%$ ConnectionStrings:VVGTechnicianConnectionString %>" SelectCommand="EXEC [App_SingleTechApproval] @empid, @payrollId">
                             <SelectParameters>
                                 <asp:ControlParameter ControlID="HiddenFieldEmpIdUser" Name="empid" PropertyName="Value" />
                                 <asp:ControlParameter ControlID="RadDropDownListPayPeriods" Name="payrollId" PropertyName="SelectedValue" />
                             </SelectParameters>
                         </asp:SqlDataSource>
                     </telerik:LayoutColumn>
-<%--                    <telerik:LayoutColumn Span="6" SpanMd="6" SpanSm="6" HiddenXs="true">
-                        <div id="TimeApproval" runat="server" visible="false">
-                            <table style="width: 100%">
-                                <tr>
-                                    <td valign="Top" style="width: 25%">Approval Date:
-                                    </td>
-                                    <td valign="Top" style="width: 75%">
-                                        <telerik:RadDatePicker ID="RadDatePicker" runat="server">
-                                        </telerik:RadDatePicker>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td valign="Top" style="width: 25%">Approval Type:
-                                    </td>
-                                    <td valign="Top" style="width: 75%">
-                                        <telerik:RadDropDownList ID="RadDropDownListApproval" runat="server" Width="100%" OnSelectedIndexChanged="RadDropDownListApproval_SelectedIndexChanged" AutoPostBack="true">
-                                            <Items>
-                                                <telerik:DropDownListItem Text="I approve my time punches are accurate to the current date time." Value="1" />
-                                                <telerik:DropDownListItem Text="My time punches have errors." Value="0" />
-                                            </Items>
-                                        </telerik:RadDropDownList>
-                                    </td>
-                                </tr>
-                                <tr id="TimeApprovalReason" runat="server" visible="false">
-                                    <td>Reason:
-                                    </td>
-                                    <td>
-                                        <telerik:RadTextBox ID="RadTextBoxReason" runat="server" TextMode="MultiLine" Width="100%" Height="12em" MaxLength="200">
-                                        </telerik:RadTextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td valign="Top">Password:
-                                    </td>
-                                    <td>
-                                        <telerik:RadTextBox ID="RadTextBoxApprovalPassword" runat="server" TextMode="Password"></telerik:RadTextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <telerik:RadButton ID="RadButtonSubmitApproval" runat="server" Text="Submit" OnClick="RadButtonSubmitApproval_Click"></telerik:RadButton>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <telerik:RadLabel ID="RadLabelApprovalResponse" runat="server"></telerik:RadLabel>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </telerik:LayoutColumn>--%>
                 </Columns>
             </telerik:LayoutRow>
         </Rows>

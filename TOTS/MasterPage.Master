@@ -51,8 +51,8 @@
                                         <telerik:RadMenuItem IsSeparator="true" />
                                         <telerik:RadMenuItem Text="Approve my Time" NavigateUrl="MyTimeApprovals.aspx" />
                                         <telerik:RadMenuItem IsSeparator="true" />
-                                        <telerik:RadMenuItem Text="Manage Time Issues" NavigateUrl="MyTimeIssues.aspx" />
-                                        <telerik:RadMenuItem IsSeparator="true" />
+                                  <%--         <telerik:RadMenuItem Text="Manage Time Issues" NavigateUrl="MyTimeIssues.aspx" />
+                                        <telerik:RadMenuItem IsSeparator="true" />--%>
                                         <telerik:RadMenuItem Text="Logout" NavigateUrl="Default.aspx" />
                                     </Items>
                                 </telerik:RadMenu>

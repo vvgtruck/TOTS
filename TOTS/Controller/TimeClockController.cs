@@ -35,10 +35,10 @@ namespace TOTS.Controller
             List<PayPeriod> payPeriods = new List<PayPeriod>();
 
             //string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
-            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGWebApps;UID=Raj;PWD=Cascadia1234;";
+            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGTechnician;UID=Raj;PWD=Cascadia1234;";
 
             using (var conn = new SqlConnection(connectionString))
-            using (var command = new SqlCommand("VVGWebApps_SP_Service_SelectPayrollPeriods", conn)
+            using (var command = new SqlCommand("App_SelectPayrollPeriods", conn)
             {
                 CommandType = CommandType.StoredProcedure
             })
@@ -80,10 +80,10 @@ namespace TOTS.Controller
             TechTimeSheetCalc techTimeSheetCalc = new TechTimeSheetCalc();
 
             //string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=Excede;UID=sa;PWD=Network9899;";
-            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=Excede;UID=Raj;PWD=Cascadia1234;";
+            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGTechnician;UID=Raj;PWD=Cascadia1234;";
 
             using (var conn = new SqlConnection(connectionString))
-            using (var command = new SqlCommand("user_sp_VVGDev_TTS_ServiceTechnicianTimeCalc", conn)
+            using (var command = new SqlCommand("App_TechnicianTimeCalc", conn)
             {
                 CommandType = CommandType.StoredProcedure
             })
@@ -183,10 +183,10 @@ namespace TOTS.Controller
             float totalAttendenceHours = 0;
 
             //string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
-            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGWebApps;UID=Raj;PWD=Cascadia1234;";
+            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGTechnician;UID=Raj;PWD=Cascadia1234;";
 
             using (var conn = new SqlConnection(connectionString))
-            using (var command = new SqlCommand("VVGWebApps_SP_Service_SelectTechTimeSingleTechAttendanceV2", conn)
+            using (var command = new SqlCommand("App_SingleTechAttendance", conn)
             {
                 CommandType = CommandType.StoredProcedure
             })
@@ -330,10 +330,10 @@ namespace TOTS.Controller
             float totalShopFloorHours = 0;
 
             //string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
-            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGWebApps;UID=Raj;PWD=Cascadia1234;";
+            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGTechnician;UID=Raj;PWD=Cascadia1234;";
 
             using (var conn = new SqlConnection(connectionString))
-            using (var command = new SqlCommand("VVGWebApps_SP_Service_SelectTechTimeSingleTechShopFloor", conn)
+            using (var command = new SqlCommand("App_SingleTechShopFloor", conn)
             {
                 CommandType = CommandType.StoredProcedure
             })
@@ -452,10 +452,10 @@ namespace TOTS.Controller
             List<WorkProductionBonus> workProductionBonuses = new List<WorkProductionBonus>();
 
             //string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
-            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGWebApps;UID=Raj;PWD=Cascadia1234;";
+            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGTechnician;UID=Raj;PWD=Cascadia1234;";
 
             using (var conn = new SqlConnection(connectionString))
-            using (var command = new SqlCommand("VVGWebApps_SP_Service_SelectTechTimeSingleTechProdBonus", conn)
+            using (var command = new SqlCommand("App_SingleTechProdBonus", conn)
             {
                 CommandType = CommandType.StoredProcedure
             })
@@ -528,10 +528,10 @@ namespace TOTS.Controller
             List<TimeApproval> timeApprovals = new List<TimeApproval>();
 
             //string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGWebApps;UID=sa;PWD=Network9899;";
-            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGWebApps;UID=Raj;PWD=Cascadia1234;";
+            string connectionString = "Data Source=68.14.228.213,14433\\SQLEXPRESS,1433;Initial Catalog=VVGTechnician;UID=Raj;PWD=Cascadia1234;";
 
             using (var conn = new SqlConnection(connectionString))
-            using (var command = new SqlCommand("VVGWebApps_SP_Service_SelectTechTimeSingleTechApprovalV2", conn)
+            using (var command = new SqlCommand("App_SingleTechApproval", conn)
             {
                 CommandType = CommandType.StoredProcedure
             })

@@ -24,7 +24,6 @@ namespace TOTS
                 catch
                 {
                     Server.Transfer("/Default.aspx?timeout=yes");
-
                 }
             }
 
@@ -32,6 +31,11 @@ namespace TOTS
             {
 
             }
+        }
+
+        protected void Page_LoadComplete(object sender, EventArgs e)
+        {
+            RadDataFormTechTime.Rebind();
         }
 
         protected void RadButtonUpdate_Click(object sender, EventArgs e)

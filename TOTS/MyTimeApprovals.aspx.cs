@@ -39,6 +39,8 @@ namespace TOTS
             //RadTextBoxReason.Text = string.Empty;
             //RadLabelApprovalResponse.Text = string.Empty;
 
+            RadDataFormTechTime.Rebind();
+
 
         }
         protected void RadButtonSubmitApproval_Click(object sender, EventArgs e)
@@ -165,9 +167,9 @@ namespace TOTS
                 string s_EmpIdUser = HiddenFieldEmpIdUser.Value;
 
                 // SQL Call for Approving Check Request By Id
-                string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=Excede;UID=sa;PWD=Network9899;";
+                string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGTechnician;UID=sa;PWD=Network9899;";
                 using (var conn = new SqlConnection(connectionString))
-                using (var command = new SqlCommand("user_sp_VVGDev_TOTS_ApproveSingleDay", conn)
+                using (var command = new SqlCommand("App_SingleTechApproval_ApproveDay", conn)
                 {
                     CommandType = CommandType.StoredProcedure
                 })
@@ -231,15 +233,15 @@ namespace TOTS
                 GridDataItem dataBoundItem = e.Item as GridDataItem;
 
                 //Disable based on Idle Time
-                if (float.Parse(dataBoundItem["Idle"].Text) >= .21)
-                {
-                    dataBoundItem["Approve"].Enabled = false;
-                    dataBoundItem["Approve"].Text = "Issue: Idle Time";
-                }
-                else
-                {
-                    dataBoundItem["Approve"].Enabled = true;
-                }
+                //if (float.Parse(dataBoundItem["Idle"].Text) >= .21)
+                //{
+                //    dataBoundItem["Approve"].Enabled = false;
+                //    dataBoundItem["Approve"].Text = "Issue: Idle Time";
+                //}
+                //else
+                //{
+                //    dataBoundItem["Approve"].Enabled = true;
+                //}
 
                 //Disable based on Shop > Attendence
                 if (float.Parse(dataBoundItem["Shop"].Text) > float.Parse(dataBoundItem["Attendence"].Text))
@@ -264,6 +266,8 @@ namespace TOTS
                     dataBoundItem["Idle"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
                     dataBoundItem["Approve"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
                     dataBoundItem["Approval"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
+                    dataBoundItem["ApproveTime"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
+                    dataBoundItem["ApproveName"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
                 }
                 else
                 {
@@ -274,6 +278,8 @@ namespace TOTS
                     dataBoundItem["Idle"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
                     dataBoundItem["Approve"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
                     dataBoundItem["Approval"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
+                    dataBoundItem["ApproveTime"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
+                    dataBoundItem["ApproveName"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
                 }
             }
         }

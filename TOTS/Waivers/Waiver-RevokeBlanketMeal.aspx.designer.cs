@@ -11,7 +11,7 @@ namespace TOTS.Waivers
 {
 
 
-    public partial class FederalLunchLess30Waiver
+    public partial class Waiver_RevokeBlanketMeal
     {
 
         /// <summary>
