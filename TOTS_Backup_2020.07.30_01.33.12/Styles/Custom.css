@@ -1,0 +1,583 @@
+﻿/* Custom CSS*/
+body {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+
+.RadButton .rbText {
+    display: inline-block !important;
+    vertical-align: top !important;
+    font-size: 12px !important;
+    margin: 2px 0 0 0 !important;
+}
+
+#wrapper .FilterTable .RadButton {
+    font-size: 1em !important;
+    margin-bottom: 4px !important;
+}
+
+table.FilterTable {
+    width: 100% !important;
+}
+
+.rbVerticalList {
+    display: inline-block !important;
+    vertical-align: top !important;
+    width: 30% !important;
+}
+
+.RadDropDownList {
+    margin-bottom: 5px !important;
+}
+
+.SettingsDropDownList {
+    width: 25% !important;
+}
+
+.initiallyHidden {
+    display: npne;
+}
+
+.rmpView table td button {
+    margin-bottom: 0 !important;
+}
+
+.vvg-fd-header-container {
+    float: left;
+    width: 100%;
+    padding: 1.575em 0 1.300em 0 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    position: fixed !important;
+    z-index: 9999;
+    background: #fff !important;
+    top: 0;
+}
+
+#wrapper .vvg-fd-header-container .logo {
+    float: left;
+    width: 189px;
+    padding: 0 1.875em 0 1.875em;
+    margin: 0;
+}
+
+#wrapper .vvg-fd-header-container .header {
+    background: transparent;
+    padding: 0 1.875em 0 0;
+    float: right;
+    width: auto;
+}
+
+.vvg-fd-header-container .RadMenu_Bootstrap .rmRootGroup {
+    border-color: transparent;
+    color: #333333;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+    .vvg-fd-header-container .RadMenu_Bootstrap .rmRootGroup .rmRootLink {
+        padding: 18px 10px 0 10px;
+        color: #333;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+.vvg-fd-header-container .RadMenu_Bootstrap .rmRootLink:hover {
+    color: #115491;
+    background-color: transparent;
+}
+
+#ContentPlaceHolder1_JumbotronLayout {
+    margin-top: 95px;
+}
+
+#wrapper .jumbotron h1 {
+    border-bottom: none !important;
+    display: inline-block !important;
+    padding-bottom: 0 !important;
+    font-size: 20px;
+    color: #115592;
+    font-weight: 500;
+    margin: 20px 0 0 0;
+}
+
+#wrapper .jumbotron h4 {
+    font-weight: normal;
+    font-weight: normal;
+    font-size: 16px;
+    margin: 5px 0 5px 0;
+}
+
+.jumbotron h3 {
+    font-size: 18px;
+    color: #115592;
+    font-weight: 500;
+    margin-top: 0;
+}
+
+.RadDropDownList_Bootstrap {
+    color: #333;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+}
+
+#wrapper .jumbotron {
+    background: #fff !important;
+}
+
+.rtsHorizontal .rtsLI {
+    display: inline-block;
+    vertical-align: top;
+    background: #8192ab;
+}
+
+.RadTabStrip_Bootstrap .rtsLevel1 .rtsLink {
+    color: #fff !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 14px;
+}
+
+.RadTabStrip_Bootstrap .rtsLevel1 .rtsSelected .rtsLink {
+    color: #fff !important;
+}
+
+.RadTabStrip_Bootstrap .rtsLevel1 .rtsSelected .rtsLink {
+    border-color: #115592 !important;
+    color: #fff !important;
+    background-color: #115592 !important;
+}
+
+.RadTabStrip_Bootstrap .rtsLevel1 .rtsHovered .rtsLink {
+    border-color: #115592 !important;
+    color: #23527c !important;
+    background-color: #115592 !important;
+}
+
+.RadTabStrip_Bootstrap .rtsLevel1 .rtsHovered .rtsLink {
+    color: #fff !important;
+}
+
+.rtsHorizontal .rtsLI {
+    border-right: 1px solid #fff !important;
+}
+
+table.custom-filter-table {
+    width: 100% !important;
+}
+
+.RadDropDownList_Bootstrap {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+#wrapper .footer {
+    padding: 20px 15px !important;
+    line-height: normal !important;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    border-top: 1px solid #eee;
+    margin-top: 25px !important;
+}
+
+.page-first-block {
+    float: left;
+    width: 100%;
+}
+
+.page-first-block-left {
+    float: left;
+    width: 80%;
+}
+
+.page-first-block-right {
+    float: right;
+    width: auto;
+    margin: 25px 0 0 0;
+}
+
+    .page-first-block-right button {
+        background: #115592 !important;
+        color: #fff !important;
+        border: 1px solid #115592 !important;
+        line-height: normal !important;
+    }
+
+        .page-first-block-right button .rbText {
+            font-size: 14px !important;
+            margin: 0 !important;
+            letter-spacing: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .page-first-block-right button:hover {
+            background: transparent !important;
+        }
+
+            .page-first-block-right button:hover .rbText {
+                color: #115592 !important;
+            }
+
+.smalllabel {
+    font-size: 12px;
+    float: right;
+    width: auto;
+    text-align: right;
+    line-height: normal;
+}
+
+table.custom-filter-table td:last-child {
+    width: 24%;
+}
+
+table.custom-filter-table td:first-child {
+    width: 21%;
+}
+
+.rbVerticalList {
+    display: inline-block !important;
+    vertical-align: top !important;
+    width: 100% !important;
+}
+
+    .rbVerticalList button {
+        float: left !important;
+        width: 33% !important;
+        text-align: left !important;
+        margin-bottom: 3px !important;
+    }
+
+.first-top button {
+    width: 45% !important;
+}
+
+.RadLabel b {
+    font-weight: 600;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif !important;
+    color: #115592;
+}
+
+.RadLabel span {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.RadDropDownList_Bootstrap .rddlInner {
+    border-color: #115592 !important;
+    color: #115592 !important;
+    background-color: #fff !important;
+    cursor: pointer;
+}
+
+.RadDropDownList_Bootstrap .rddlHovered {
+    border-color: #115592 !important;
+    color: #fff !important;
+    background-color: #115592 !important;
+}
+
+.rddlPopup_Bootstrap .rddlItem {
+    padding: 3px 12px;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 14px !important;
+}
+
+.rmpView .RadButton {
+    border-color: #115592 !important;
+    padding: 6px 12px 4px 12px important;
+    vertical-align: top important;
+    margin-top: -5px important;
+}
+
+    .rmpView .RadButton .rbText {
+        font-size: 13px !important;
+        margin: 0 !important;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500 !important;
+    }
+
+.RadButton_Bootstrap.rbButton.rbHovered, .RadButton_Bootstrap.rbButton.rbToggled.rbHovered, .RadButton_Bootstrap.rbButton .rbHovered {
+    border-color: #115592 important;
+    color: #fff important;
+    background-color: #115592 important;
+    box-shadow: none important;
+}
+
+.rpgTable th {
+    background: #8192ab !important;
+}
+
+.rpgTable th {
+    background: #8192ab !important;
+    font-weight: normal !important;
+    color: #fff !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 14px !important;
+}
+
+.rpgTable td {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 14px;
+}
+
+.rpgRowHeader {
+    font-weight: 500 !important;
+}
+
+.vvg-fd-header-container .RadMenu_Bootstrap .rmRootLink:focus,
+.vvg-fd-header-container .RadMenu_Bootstrap .rmRootLink:active {
+    box-shadow: none;
+}
+
+.RadTabStrip .rtsLink {
+    padding: 8px 10px;
+}
+
+.rmpView h2 {
+    font-size: 20px;
+    color: #115592;
+    font-weight: 500;
+    margin: 20px 0 10px 0;
+}
+
+#wrapper .header .RadMenu {
+    margin: 0 10px 0 0 !important;
+    float: right !important;
+}
+
+#MasterLayout .logo {
+    margin-left: -15px !important;
+}
+
+.mainhomepage {
+    margin-top: 120px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+    .mainhomepage .RadMenu_Bootstrap .rmRootGroup {
+        border-color: transparent;
+        color: #333;
+        background-color: transparent;
+        border-radius: 0;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .mainhomepage .rmItem.rmSeparator {
+        display: none !important;
+    }
+
+    .mainhomepage .rmLink.rmRootLink {
+        background: #fff;
+        color: #115592 !important;
+        font-weight: normal;
+        font-family: 'Montserrat', sans-serifunset;
+        font-size: 15px;
+        border: 1px solid #ddd;
+        padding: 12px 20px !important;
+        margin: -1px;
+        white-space: normal;
+    }
+
+    .mainhomepage .RadMenu_Bootstrap .rmRootLink:hover {
+        background-color: #115592;
+        color: #fff !important;
+    }
+
+    .mainhomepage .RadMenu_Bootstrap .rmFocused .rmRootLink {
+        box-shadow: none;
+        background: #115592;
+    }
+
+    .mainhomepage .t-col.t-col-12.jumbotron {
+        margin: 0 !important;
+        padding: 0 15px !important;
+    }
+
+#wrapper .mainhomepage .jumbotron h1 {
+    font-size: 26px !important;
+    margin: 0 0 20px 0 !important;
+    padding: 0 0 15px 0 !important;
+    font-family: 'Montserrat', sans-serifunset;
+    font-weight: 400 !important;
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #115592 !important;
+}
+
+#wrapper .mainhomepage h3 {
+    font-size: 18px;
+    color: #115592;
+    margin: 0;
+}
+
+#wrapper .mainhomepage h4 {
+    font-size: 18px;
+    color: #115592;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+
+.RadGrid_Bootstrap .rgHeader, .RadGrid_Bootstrap th.rgResizeCol, .RadGrid_Bootstrap .rgHeaderWrapper {
+    background-color: #8192ab !important;
+    color: #fff !important;
+    font-family: 'Montserrat', sans-serifunset;
+    font-size: 14px;
+    line-height: normal;
+}
+
+.RadGrid_Bootstrap .rgRow > td, .RadGrid_Bootstrap .rgAltRow > td {
+    border-style: solid;
+    border-width: 0 0 1px 1px;
+    font-family: 'Montserrat', sans-serifunset;
+    font-weight: 500;
+}
+
+.customtopelement button {
+    background: #115592 !important;
+    color: #fff !important;
+    border: 1px solid #115592 !important;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+    .customtopelement button:hover {
+        background: transparent !important;
+        color: #115592 !important;
+        border: 1px solid #115592 !important;
+        font-family: 'Montserrat', sans-serif !important;
+    }
+
+.mainhomepage button {
+    background: #115592 !important;
+    color: #fff !important;
+    border: 1px solid #115592 !important;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+    .mainhomepage button:hover {
+        background: transparent !important;
+        color: #115592 !important;
+        border: 1px solid #115592 !important;
+        font-family: 'Montserrat', sans-serif !important;
+    }
+
+
+.mainlogin button {
+    background: #115592 !important;
+    color: #fff !important;
+    border: 1px solid #115592 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    margin: 12px 0 8px 0 !important;
+}
+
+    .mainlogin button:hover {
+        background: transparent !important;
+        color: #115592 !important;
+        border: 1px solid #115592 !important;
+        font-family: 'Montserrat', sans-serif !important;
+    }
+
+.rmpView td {
+    vertical-align: top;
+}
+
+.mainlogin .t-container {
+    width: 500px;
+    margin: 130px auto auto auto;
+}
+
+.mainlogin #wrapper .header {
+    background-color: transparent;
+    padding: 10px 0;
+    margin: 0;
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+
+.mainlogin #wrapper .logo img {
+    max-width: 189px;
+}
+
+.mainlogin #wrapper .jumbotron h1 {
+    border-bottom: none !important;
+    display: inline-block !important;
+    padding-bottom: 0 !important;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 500;
+    margin: 0;
+    background: #115592;
+    float: left;
+    width: 92%;
+    padding: 15px 20px !important;
+    font-family: 'Montserrat', sans-serifunset;
+    font-weight: normal;
+}
+
+.mainlogin .t-col.t-col-12.jumbotron {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.mainlogin #wrapper .footer {
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.logintable {
+    float: left;
+    width: 100%;
+}
+
+    .logintable td {
+        float: left;
+        width: 100%;
+    }
+
+        .logintable td h2 {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .logintable td span {
+            float: left;
+            width: 100%;
+        }
+
+            .logintable td span input {
+                float: left;
+                width: 100% !important;
+                border-radius: 0 !important;
+                height: 42px !important;
+            }
+
+.mainlogin #wrapper a.logo {
+    margin: 0 0 10px 0;
+}
+
+.logintable tr {
+    margin: 10px 0 0 0;
+    float: left;
+    width: 100%;
+}
+
+.logintablecontainer {
+    padding: 0 !important;
+}
+
+    .logintablecontainer .logintable {
+        border: 1px solid #ddd;
+        padding: 0 15px 5px 15px;
+        margin-bottom: 20px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .logintablecontainer .logintable {
+        border: 1px solid #ddd;
+        padding: 0 15px;
+        margin-bottom: 20px;
+    }

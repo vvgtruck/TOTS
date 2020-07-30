@@ -43,7 +43,7 @@ namespace TOTS
 
         protected void RadGridSingleTechTimeTimeIssues_ItemCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e)
         {
-            if (e.CommandName == "Acknowledge")
+            if (e.CommandName == "Voluntary")
             {
                 GridDataItem item = (GridDataItem)e.Item;
 
@@ -51,7 +51,83 @@ namespace TOTS
                 string s_ShiftStart = item["ShiftStart"].Text;
                 string s_BrnId = item["BrnId"].Text;
                 string s_EmpIdUser = HiddenFieldEmpIdUser.Value;
-                string s_Response = "Yes";
+                string s_Response = "Voluntary";
+
+                DateTime dt_ShiftStart = DateTime.Parse(s_ShiftStart);
+
+                //Exec Code for adding acknowledgement if it's waivable, mark it on the SQL table (Waiver = 1).
+                string connectionString = "Data Source=VVGSVDMS001.Velocity.Company;Initial Catalog=VVGTechnician;UID=sa;PWD=Network9899;";
+                using (var conn = new SqlConnection(connectionString))
+                using (var command = new SqlCommand("App_SingleTechTimeIssue_Response", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                })
+                {
+                    conn.Open();
+
+                    // Add input parameter
+                    SqlParameter EmpId = new SqlParameter();
+                    EmpId.ParameterName = "@empid";
+                    EmpId.Value = s_EmpIdUser;
+                    EmpId.SqlDbType = SqlDbType.VarChar;
+                    EmpId.Size = 12;
+                    EmpId.Direction = ParameterDirection.Input;
+                    command.Parameters.Add(EmpId);
+
+
+                    SqlParameter BrnId = new SqlParameter();
+                    BrnId.ParameterName = "@BrnId";
+                    BrnId.Value = s_BrnId;
+                    BrnId.SqlDbType = SqlDbType.VarChar;
+                    BrnId.Size = 3;
+                    BrnId.Direction = ParameterDirection.Input;
+                    command.Parameters.Add(BrnId);
+
+                    SqlParameter ShiftStart = new SqlParameter();
+                    ShiftStart.ParameterName = "@ShiftStart";
+                    ShiftStart.Value = dt_ShiftStart;
+                    ShiftStart.SqlDbType = SqlDbType.DateTime;
+                    ShiftStart.Direction = ParameterDirection.Input;
+                    command.Parameters.Add(ShiftStart);
+
+                    SqlParameter Issue = new SqlParameter();
+                    Issue.ParameterName = "@Violation";
+                    Issue.Value = s_Issue;
+                    Issue.SqlDbType = SqlDbType.VarChar;
+                    Issue.Size = 100;
+                    Issue.Direction = ParameterDirection.Input;
+                    command.Parameters.Add(Issue);
+
+                    SqlParameter Response = new SqlParameter();
+                    Response.ParameterName = "@Response";
+                    Response.Value = s_Response;
+                    Response.SqlDbType = SqlDbType.VarChar;
+                    Response.Size = 100;
+                    Response.Direction = ParameterDirection.Input;
+                    command.Parameters.Add(Response);
+
+                    //execute
+                    command.ExecuteNonQuery();
+
+                    conn.Close();
+                    conn.Dispose();
+
+                }
+
+                //Refresh the grid so that the acknowledged line turns Yellow or Green.
+                RadGridSingleTechTimeTimeIssues.Rebind();
+
+            }
+
+            if (e.CommandName == "Involuntary")
+            {
+                GridDataItem item = (GridDataItem)e.Item;
+
+                string s_Issue = item["Issue"].Text;
+                string s_ShiftStart = item["ShiftStart"].Text;
+                string s_BrnId = item["BrnId"].Text;
+                string s_EmpIdUser = HiddenFieldEmpIdUser.Value;
+                string s_Response = "Involuntary";
 
                 DateTime dt_ShiftStart = DateTime.Parse(s_ShiftStart);
 
@@ -75,7 +151,7 @@ namespace TOTS
                     command.Parameters.Add(EmpId);
 
                     SqlParameter BrnId = new SqlParameter();
-                    BrnId.ParameterName = "@violation";
+                    BrnId.ParameterName = "@BrnId";
                     BrnId.Value = s_BrnId;
                     BrnId.SqlDbType = SqlDbType.VarChar;
                     BrnId.Size = 3;
@@ -125,33 +201,34 @@ namespace TOTS
             {
                 GridDataItem dataBoundItem = e.Item as GridDataItem;
 
+                Color LightGreen = Color.FromArgb(198, 239, 206);
+                Color LightYellow = Color.FromArgb(255, 255, 224);
+                Color LightRed = Color.FromArgb(255, 199, 206);
 
-                if (dataBoundItem["Acknowledge"].Text == "Acknowledged" && (dataBoundItem["WaiverComplete"].Text == "Yes" || dataBoundItem["WaiverComplete"].Text == "N/A"))
+
+
+
+                if (dataBoundItem["Response"].Text == "Voluntary" || dataBoundItem["Response"].Text == "Involuntary" )
                 {
-                    dataBoundItem["TimeIssue"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
-                    //dataBoundItem["ShiftStart"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
-                    //dataBoundItem["ShiftEnd"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
-                    //dataBoundItem["AcknowledgeButton"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
-                    dataBoundItem["Acknowledge"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
-                    dataBoundItem["WaiverComplete"].BackColor = Color.FromArgb(198, 239, 206); //Light Green
-                }
-                else if (dataBoundItem["Acknowledge"].Text == "Acknowledged") 
-                {
-                    dataBoundItem["Issue"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
-                    //dataBoundItem["ShiftStart"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
-                    //dataBoundItem["ShiftEnd"].BackColor = Color.FromArgb(255, 255, 224);  //Light Yellow
-                    //dataBoundItem["AcknowledgeButton"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
-                    dataBoundItem["Acknowledge"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
-                    dataBoundItem["WaiverComplete"].BackColor = Color.FromArgb(255, 255, 224); //Light Yellow
+                    dataBoundItem["EmpId"].BackColor = LightGreen;
+                    dataBoundItem["BrnId"].BackColor = LightGreen;
+                    dataBoundItem["Issue"].BackColor = LightGreen;
+                    dataBoundItem["ShiftStart"].BackColor = LightGreen;
+                    dataBoundItem["Verbage"].BackColor = LightGreen;
+                    dataBoundItem["Voluntary"].BackColor = LightGreen;
+                    dataBoundItem["Involuntary"].BackColor = LightGreen;
+                    dataBoundItem["Response"].BackColor = LightGreen;
                 }
                 else
                 {
-                    dataBoundItem["TimeIssue"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
-                    //dataBoundItem["ShiftStart"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
-                    //dataBoundItem["ShiftEnd"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
-                    //dataBoundItem["AcknowledgeButton"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
-                    dataBoundItem["Acknowledge"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
-                    dataBoundItem["WaiverComplete"].BackColor = Color.FromArgb(255, 199, 206); //Light Red
+                    dataBoundItem["EmpId"].BackColor = LightYellow;
+                    dataBoundItem["BrnId"].BackColor = LightYellow;
+                    dataBoundItem["Issue"].BackColor = LightYellow;
+                    dataBoundItem["ShiftStart"].BackColor = LightYellow;
+                    dataBoundItem["Verbage"].BackColor = LightYellow;
+                    dataBoundItem["Voluntary"].BackColor = LightYellow;
+                    dataBoundItem["Involuntary"].BackColor = LightYellow;
+                    dataBoundItem["Response"].BackColor = LightYellow;
                 }
             }
         }

@@ -1,0 +1,82 @@
+﻿body {
+    font-family: Calibri;
+}
+
+.viewarea {
+    margin: 0 auto;
+    width: 90%;
+}
+
+.header-cont {
+    width: 100%;
+    top: 0px;
+}
+
+.header {
+    text-align: right;
+    font-size: small;
+    height: 20px;
+    width: auto;
+    margin: 0px auto;
+}
+
+.centered {
+    margin: 0 auto;
+    text-align: left;
+    width: 90%;
+}
+
+.content {
+    width: auto;
+    height: auto;
+    margin: 40px auto;
+}
+
+
+.square {
+    float: left;
+    position: relative;
+    width: 15%;
+    padding-bottom: 12%; /* = width for a 1:1 aspect ratio */
+    margin: 1.66%;
+    border: double;
+    border-width: 3px;
+    border-color: black;
+}
+
+    .square:hover {
+        float: left;
+        position: relative;
+        width: 15%;
+        padding-bottom: 12%; /* = width for a 1:1 aspect ratio */
+        margin: 1.66%;
+        border: double;
+        border-width: 3px;
+        border-color: green;
+        cursor: pointer;
+    }
+
+.AppSettings {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.AppTitle {
+    position: absolute;
+    bottom: 1em;
+    Left: 1em;
+}
+
+.AppIcon {
+    position: absolute;
+    top: 1em;
+    Left: 1em;
+}
+
+.center {
+    margin: auto;
+    text-align: center;
+    width: 50%;
+    padding: 10px;
+}

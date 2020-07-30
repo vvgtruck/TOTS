@@ -75,16 +75,9 @@
                     <telerik:LayoutColumn Span="8" SpanMd="8" SpanSm="8" HiddenXs="true">
                         <div>
                             <br />
-                            The below grid will list all potential issues regarding technician lunch breaks and attendance.  The goal of this interaction is insure that employee's rights are not being infringed upon and to give employee's a clear form of communication to upper management regarding all attendance issues.
+                            The below grid will list all potential issues regarding technician lunch breaks and attendance.  Please Refer to the Employee Handbook found at https://hr.vvg.zone/formspolicies 
                         </div>
                         <br />
-                        <div>
-                            If an issue is listed below, we need to you to inform of us if it was a mistake or if you felt compelled to work through your lunch or cut your lunch short due to a request by your supervisor.
-                        </div>
-                        <br />
-                        <div>
-                            Marking either “Yes” or “No” will notify only the General Manager for your Region (Either CA or NV/AZ), with a “Yes” indication allowing for follow up to discuss the issue.
-                        </div>
                     </telerik:LayoutColumn>
                 </Columns>
             </telerik:LayoutRow>
@@ -99,19 +92,21 @@
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="BrnId" FilterControlAltText="Filter BrnId column" HeaderText="BrnId" SortExpression="BrnId" UniqueName="BrnId">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Issue" FilterControlAltText="Filter Issue column" HeaderText="Issue" SortExpression="Issue" UniqueName="Issue">
-                                    </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="ShiftStart" FilterControlAltText="Filter ShiftStart column" HeaderText="ShiftStart" SortExpression="ShiftStart" UniqueName="ShiftStart" DataType="System.DateTime">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridTemplateColumn>
+                                    <telerik:GridBoundColumn DataField="Issue" FilterControlAltText="Filter Issue column" HeaderText="Issue" SortExpression="Issue" UniqueName="Issue">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridTemplateColumn UniqueName="Verbage">
                                         <ItemTemplate>
                                             <div>
-                                                When this time issued occurred were you instructed by your supervisor to ignore company policy?
-                                                <telerik:RadButton ID="RadButtonIssueAccident" runat="server" Text="No (Dismiss)"></telerik:RadButton>
-                                                <telerik:RadButton ID="RadButtonIssueViolation" runat="server" Text="Yes (Follow-Up)"></telerik:RadButton>
+                                                Was this action Voluntary or Involuntary?  
                                             </div>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
+                                    <telerik:GridButtonColumn CommandName="Voluntary" Text="Voluntary (Dismiss)" UniqueName="Voluntary">
+                                    </telerik:GridButtonColumn>
+                                    <telerik:GridButtonColumn CommandName="Involuntary" Text="Involuntary (Follow-Up)" UniqueName="Involuntary">
+                                    </telerik:GridButtonColumn>
                                     <telerik:GridBoundColumn DataField="Response" FilterControlAltText="Filter Response column" HeaderText="Response" ReadOnly="True" SortExpression="Response" UniqueName="Response">
                                     </telerik:GridBoundColumn>
                                 </Columns>
